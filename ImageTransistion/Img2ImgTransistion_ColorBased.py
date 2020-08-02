@@ -62,8 +62,8 @@ if not RandomImages:
     I2 = cv2.cvtColor(cv2.imread(mainPath + imgName_2), cv2.COLOR_BGR2RGB)
 else:
     # Random Images
-    I1 = Utils.GenerateGradient_LinearRadial(np.array([255, 255, 255]), np.array([255, 0, 0]), (100, 100, 3))
-    I2 = Utils.GenerateGradient_LinearRadial(np.array([0, 0, 255]), np.array([255, 255, 255]), (100, 100, 3))
+    I1 = Utils.GenerateGradient_LinearRadial(np.array([255, 255, 255]), np.array([255, 0, 0]), imgSize)
+    I2 = Utils.GenerateGradient_LinearRadial(np.array([0, 0, 255]), np.array([255, 255, 255]), imgSize)
 
 # Resize
 I1, I2, imgSize = Utils.ResizeImages(I1, I2, ResizeFunc, ResizeParams)
