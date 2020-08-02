@@ -38,7 +38,7 @@ mainPath = 'TestImgs/'
 imgName_1 = 'Test.jpg'
 imgName_2 = 'Test2.jpg'
 
-imgSize = (100, 100, 3)
+imgSize = (300, 300, 3)
 
 TransistionFunc = Utils.LinearTransistion
 

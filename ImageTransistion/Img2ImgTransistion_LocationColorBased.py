@@ -70,7 +70,7 @@ def ApplyTransistionToMapping(LocationMap, ColorMap, BGColors):
     NColorsAdded_Imgs = []
     BGColor_Mov = TransistionFunc_Color(BGColors[0][0], BGColors[1][0], N)
     for n in range(N):
-        GeneratedImgs.append(np.ones(I1.shape, np.uint8)*BGColor_Mov[n])
+        GeneratedImgs.append(np.ones(I1.shape, int)*BGColor_Mov[n])
         NColorsAdded_Imgs.append(np.zeros((I1.shape[0], I1.shape[1])).astype(int))
     for cm in ColorMap:
         cmk = ','.join([','.join(np.array(cm[0]).astype(str)), ','.join(np.array(cm[1]).astype(str))])
@@ -152,7 +152,7 @@ displayDelay = 0.0001
 
 plotData = True
 saveData = True
-loadData = False
+loadData = True
 
 # Run Code
 I1 = None
@@ -166,7 +166,6 @@ if not RandomImages:
 else:
     # Random Images
     # Params
-    imgSize = (100, 100, 3)
     N_Colors_1 = 10
     ColorCount_Range_1 = (0, 50)
     N_Colors_2 = 5

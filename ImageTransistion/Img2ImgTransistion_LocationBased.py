@@ -35,7 +35,7 @@ def I2I_Transistion_LocationBased_ExactColorMatch(I1, I2, TransistionFunc, Trans
     # Generate Movement Transistion between Images using Custom Transistion Function
     NColorsAdded_Imgs = []
     for n in range(N):
-        GeneratedImgs.append(np.ones(I1.shape, np.uint8)*BGColor)
+        GeneratedImgs.append(np.ones(I1.shape, int)*BGColor)
         NColorsAdded_Imgs.append(np.zeros((I1.shape[0], I1.shape[1])).astype(int))
 
     # Apply Transistion for each pixel in 2 images
@@ -91,7 +91,7 @@ mainPath = 'TestImgs/'
 imgName_1 = 'Test.png'
 imgName_2 = 'Test2.png'
 
-imgSize = (100, 100, 3)
+imgSize = (150, 150, 3)
 
 BGColor = [0, 0, 0]
 
@@ -101,8 +101,8 @@ TransistionParams = None
 MappingFunc = Utils.Mapping_maxDist
 MappingParams = None
 
-ResizeFunc = Utils.Resize_MaxSize
-ResizeParams = None
+ResizeFunc = Utils.Resize_CustomSize
+ResizeParams = imgSize
 
 N = 50
 
@@ -123,9 +123,8 @@ if not RandomImages:
 else:
     # Random Images
     # Params
-    imgSize = (100, 100, 3)
-    N_Colors = 5
-    ColorCount_Range = (0, 50)
+    N_Colors = 10
+    ColorCount_Range = (0, 100)
     Colors = list(np.random.randint(0, 255, (N_Colors, 3)))
     ColorCounts = list(np.random.randint(ColorCount_Range[0], ColorCount_Range[1], N_Colors))
 
