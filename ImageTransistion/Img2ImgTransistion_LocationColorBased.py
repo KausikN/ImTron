@@ -70,7 +70,7 @@ def ApplyTransistionToMapping(LocationMap, ColorMap, BGColors):
     NColorsAdded_Imgs = []
     BGColor_Mov = TransistionFunc_Color(BGColors[0][0], BGColors[1][0], N)
     for n in range(N):
-        GeneratedImgs.append(np.ones(I1.shape, int)*BGColor_Mov[n])
+        GeneratedImgs.append(np.ones(I1.shape, np.uint8)*BGColor_Mov[n])
         NColorsAdded_Imgs.append(np.zeros((I1.shape[0], I1.shape[1])).astype(int))
     for cm in ColorMap:
         cmk = ','.join([','.join(np.array(cm[0]).astype(str)), ','.join(np.array(cm[1]).astype(str))])
@@ -126,10 +126,10 @@ RandomImages = False
 SimplifyImages = True
 
 mainPath = 'TestImgs/'
-imgName_1 = 'Thresh.jpeg'
-imgName_2 = 'Scenery.jpeg'
+imgName_1 = 'LOL.png'
+imgName_2 = 'Valo_1.jpg'
 
-imgSize = (100, 100, 3)
+imgSize = (300, 170, 3)
 
 BGColors = [[[0, 0, 0]], [[0, 0, 0]]]
 ignoreColors_N = 1
@@ -152,7 +152,7 @@ displayDelay = 0.0001
 
 plotData = True
 saveData = True
-loadData = True
+loadData = False
 
 # Run Code
 I1 = None
@@ -200,7 +200,7 @@ I1, I2, imgSize = Utils.ResizeImages(I1, I2, ResizeFunc, ResizeParams)
 if SimplifyImages:
     # Image Color Simplification
     # Params
-    maxExtraColours = 10
+    maxExtraColours = 5
     minColourDiff = 100
     DiffFunc = ImageSimplify.CheckColourCloseness_Dist_L2Norm
     DistanceFunc = ImageSimplify.EuclideanDistance
@@ -227,11 +227,16 @@ for i in range(ImagePaddingCount):
     GeneratedImgs.append(I2)
 # Save
 if saveData:
-    savePath = 'TestImgs/Test.gif'
+    saveMainPath = 'TestImgs/'
+    saveFileName = 'LocationColorTrans.gif'
     mode = 'gif'
     frameSize = (imgSize[0], imgSize[1])
     fps = 25
-    Utils.SaveImageSequence(GeneratedImgs, savePath, mode=mode, frameSize=None, fps=fps)
+    Utils.SaveImageSequence(GeneratedImgs, saveMainPath + saveFileName, mode=mode, frameSize=None, fps=fps)
+    
+    if RandomImages or True:
+        cv2.imwrite(saveMainPath + "LocationColorTrans_I1.png", I1)
+        cv2.imwrite(saveMainPath + "LocationColorTrans_I2.png", I2)
 
 # Display
 # if plotData:

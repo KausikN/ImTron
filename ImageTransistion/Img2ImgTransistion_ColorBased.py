@@ -32,9 +32,13 @@ def I2I_Transistion_ColorGradient(I1, I2, TransistionFunc, N=5):
 
 # Driver Code
 # Params
+RandomImages = True
+
 mainPath = 'TestImgs/'
 imgName_1 = 'Test.jpg'
 imgName_2 = 'Test2.jpg'
+
+imgSize = (100, 100, 3)
 
 TransistionFunc = Utils.LinearTransistion
 
@@ -46,19 +50,25 @@ N = 50
 displayDelay = 0.01
 
 plotData = True
-saveData = False
+saveData = True
 
 # Run Code
-# Read Images
-I1 = cv2.cvtColor(cv2.imread(mainPath + imgName_1), cv2.COLOR_BGR2RGB)
-I2 = cv2.cvtColor(cv2.imread(mainPath + imgName_2), cv2.COLOR_BGR2RGB)
+I1 = None
+I2 = None
 
-# Resize and Show
-I1, I2 = Utils.ResizeImages(I1, I2, ResizeFunc, ResizeParams)
+if not RandomImages:
+    # Read Images
+    I1 = cv2.cvtColor(cv2.imread(mainPath + imgName_1), cv2.COLOR_BGR2RGB)
+    I2 = cv2.cvtColor(cv2.imread(mainPath + imgName_2), cv2.COLOR_BGR2RGB)
+else:
+    # Random Images
+    I1 = Utils.GenerateGradient_LinearRadial(np.array([255, 255, 255]), np.array([255, 0, 0]), (100, 100, 3))
+    I2 = Utils.GenerateGradient_LinearRadial(np.array([0, 0, 255]), np.array([255, 255, 255]), (100, 100, 3))
 
-I1 = Utils.GenerateGradient_LinearRadial(np.array([255, 255, 255]), np.array([255, 0, 0]), (100, 100, 3))
-I2 = Utils.GenerateGradient_LinearRadial(np.array([0, 0, 255]), np.array([255, 255, 255]), (100, 100, 3))
+# Resize
+I1, I2, imgSize = Utils.ResizeImages(I1, I2, ResizeFunc, ResizeParams)
 
+# Display
 if plotData:
     plt.subplot(1, 2, 1)
     plt.imshow(I1)
@@ -71,6 +81,18 @@ GeneratedImgs = I2I_Transistion_ColorGradient(I1, I2, TransistionFunc, N)
 # Loop Back to 1st image
 GeneratedImgs.extend(GeneratedImgs[::-1])
 
+# Save
+if saveData:
+    saveMainPath = 'TestImgs/'
+    saveFileName = 'ColorTrans.gif'
+    mode = 'gif'
+    frameSize = (imgSize[0], imgSize[1])
+    fps = 25
+    Utils.SaveImageSequence(GeneratedImgs, saveMainPath + saveFileName, mode=mode, frameSize=None, fps=fps)
+    
+    if RandomImages:
+        cv2.imwrite(saveMainPath + "ColorTrans_I1.png", I1)
+        cv2.imwrite(saveMainPath + "ColorTrans_I2.png", I2)
+
 # Display
-if plotData:
-    Utils.DisplayImageSequence(GeneratedImgs, displayDelay)
+Utils.DisplayImageSequence(GeneratedImgs, displayDelay)

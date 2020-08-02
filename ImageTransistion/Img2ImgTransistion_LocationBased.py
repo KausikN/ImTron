@@ -35,7 +35,7 @@ def I2I_Transistion_LocationBased_ExactColorMatch(I1, I2, TransistionFunc, Trans
     # Generate Movement Transistion between Images using Custom Transistion Function
     NColorsAdded_Imgs = []
     for n in range(N):
-        GeneratedImgs.append(np.ones(I1.shape, int)*BGColor)
+        GeneratedImgs.append(np.ones(I1.shape, np.uint8)*BGColor)
         NColorsAdded_Imgs.append(np.zeros((I1.shape[0], I1.shape[1])).astype(int))
 
     # Apply Transistion for each pixel in 2 images
@@ -91,6 +91,8 @@ mainPath = 'TestImgs/'
 imgName_1 = 'Test.png'
 imgName_2 = 'Test2.png'
 
+imgSize = (100, 100, 3)
+
 BGColor = [0, 0, 0]
 
 TransistionFunc = Utils.LinearTransistion
@@ -107,7 +109,7 @@ N = 50
 displayDelay = 0.0001
 
 plotData = True
-saveData = False
+saveData = True
 
 # Run Code
 I1 = None
@@ -149,8 +151,10 @@ if SimplifyImages:
     I1 = ImageSimplify.ImageSimplify_ColorBased(I1, maxExtraColours, minColourDiff, DiffFunc, DistanceFunc)
     I2 = ImageSimplify.ImageSimplify_ColorBased(I2, maxExtraColours, minColourDiff, DiffFunc, DistanceFunc)
 
-# Resize and Show
-I1, I2 = Utils.ResizeImages(I1, I2, ResizeFunc, ResizeParams)
+# Resize
+I1, I2, imgSize = Utils.ResizeImages(I1, I2, ResizeFunc, ResizeParams)
+
+# Show Image
 if plotData:
     plt.subplot(1, 2, 1)
     plt.imshow(I1)
@@ -161,13 +165,19 @@ if plotData:
 # Generate Transistion Images
 GeneratedImgs = I2I_Transistion_LocationBased_ExactColorMatch(I1, I2, TransistionFunc, TransistionParams, MappingFunc, MappingParams, N, np.array(BGColor))
 
-# Display
-if plotData:
-    Utils.DisplayImageSequence(GeneratedImgs, displayDelay)
 # Save
 if saveData:
-    savePath = 'TestImgs/Test.gif'
+    print("OLDASDDSADA")
+    saveMainPath = 'TestImgs/'
+    saveFileName = 'LocationTrans.gif'
     mode = 'gif'
     frameSize = (imgSize[0], imgSize[1])
     fps = 25
-    Utils.SaveImageSequence(GeneratedImgs, savePath, mode=mode, frameSize=None, fps=fps)
+    Utils.SaveImageSequence(GeneratedImgs, saveMainPath + saveFileName, mode=mode, frameSize=None, fps=fps)
+
+    if RandomImages:
+        cv2.imwrite(saveMainPath + "LocationTrans_I1.png", I1)
+        cv2.imwrite(saveMainPath + "LocationTrans_I2.png", I2)
+
+# Display
+Utils.DisplayImageSequence(GeneratedImgs, displayDelay)
