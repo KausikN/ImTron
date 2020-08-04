@@ -3,10 +3,23 @@ Library Containing many Image Generation Functions
 '''
 
 # Imports
+import cv2
 import random
 import numpy as np
+import matplotlib.pyplot as plt
+
+import GradientLibrary
 
 # Main Functions
+# Gradient Images
+# Linear Gradients
+def GenerateGradient_LinearLinear(StartColor, EndColor, imgSize, Rotation=0, gradient_n=200):
+    Start_HEX = GradientLibrary.RGB2Hex(StartColor)
+    End_HEX = GradientLibrary.RGB2Hex(EndColor)
+    I = GradientLibrary.LineGradient2Image(GradientLibrary.Gradient(GradientLibrary.LineGradient_Linear(Start_HEX, End_HEX, gradient_n), Rotation), imgSize)
+    return I
+
+# Radial Gradients
 def GenerateGradient_LinearRadial(innerColor, outerColor, imgSize):
     centerPixel = (int(imgSize[0]/2), int(imgSize[1]/2))
 
@@ -32,7 +45,7 @@ def GenerateGradient_LinearRadial(innerColor, outerColor, imgSize):
 
     return I
 
-
+# Random Images
 def GenerateRandomImage(imgSize, BGColor, Colors, ColorCounts):
     I = np.ones(imgSize, int)*BGColor
     totalPixelCount = imgSize[0]*imgSize[1]
@@ -51,3 +64,23 @@ def GenerateRandomImage(imgSize, BGColor, Colors, ColorCounts):
             if not I_Colors[i, j] == -1:
                 I[i, j] = Colors[I_Colors[i, j]]
     return I
+
+# Text Images
+def GenerateTextImages(text, imgSize, coord, font=3, fontScale=1, fontColor=[0, 0, 0], BGColor=[255, 255, 255], thickness=1):
+    I = np.ones(imgSize, int) * np.array(BGColor)
+    I = cv2.putText(I, text, coord, font, fontScale, tuple(fontColor), thickness)
+    return I
+
+# Driver Code
+imgSize = (100, 100, 3)
+text = "K"
+coord = (50, 50)
+fontColor = [0, 0, 0]
+BGColor = [255, 255, 255]
+fontScale = 1
+thickness = 1
+font = 3
+I = GenerateTextImages(text, imgSize, coord, font=font, fontScale=fontScale, fontColor=fontColor, BGColor=BGColor, thickness=thickness)
+print(I.ndim)
+plt.imshow(I)
+plt.show()

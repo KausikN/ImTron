@@ -9,12 +9,12 @@ import matplotlib.pyplot as plt
 
 from tqdm import tqdm
 
-import Utils
-import ImageSimplify
-import ResizeLibrary
-import MappingLibrary
-import TransistionLibrary
-import ImageGenerator
+from Utils import Utils
+from Utils import ImageSimplify
+from Utils import ResizeLibrary
+from Utils import MappingLibrary
+from Utils import TransistionLibrary
+from Utils import ImageGenerator
 
 # Main Functions
 # Location Based Transistion - 2 Images

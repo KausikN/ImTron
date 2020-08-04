@@ -10,10 +10,10 @@ from matplotlib.animation import FuncAnimation, PillowWriter
 
 from tqdm import tqdm
 
-import Utils
-import ResizeLibrary
-import TransistionLibrary
-import ImageGenerator
+from Utils import Utils
+from Utils import ResizeLibrary
+from Utils import TransistionLibrary
+from Utils import ImageGenerator
 
 # Main Functions
 # Colour Based Gradient Transistion - 2 Images
