@@ -11,6 +11,9 @@ from matplotlib.animation import FuncAnimation, PillowWriter
 from tqdm import tqdm
 
 import Utils
+import ResizeLibrary
+import TransistionLibrary
+import ImageGenerator
 
 # Main Functions
 # Colour Based Gradient Transistion - 2 Images
@@ -40,9 +43,9 @@ imgName_2 = 'Test2.jpg'
 
 imgSize = (300, 300, 3)
 
-TransistionFunc = Utils.LinearTransistion
+TransistionFunc = TransistionLibrary.LinearTransistion
 
-ResizeFunc = Utils.Resize_MaxSize
+ResizeFunc = ResizeLibrary.Resize_MaxSize
 ResizeParams = None
 
 N = 50
@@ -62,8 +65,8 @@ if not RandomImages:
     I2 = cv2.cvtColor(cv2.imread(mainPath + imgName_2), cv2.COLOR_BGR2RGB)
 else:
     # Random Images
-    I1 = Utils.GenerateGradient_LinearRadial(np.array([255, 255, 255]), np.array([255, 0, 0]), imgSize)
-    I2 = Utils.GenerateGradient_LinearRadial(np.array([0, 0, 255]), np.array([255, 255, 255]), imgSize)
+    I1 = ImageGenerator.GenerateGradient_LinearRadial(np.array([255, 255, 255]), np.array([255, 0, 0]), imgSize)
+    I2 = ImageGenerator.GenerateGradient_LinearRadial(np.array([0, 0, 255]), np.array([255, 255, 255]), imgSize)
 
 # Resize
 I1, I2, imgSize = Utils.ResizeImages(I1, I2, ResizeFunc, ResizeParams)

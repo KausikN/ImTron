@@ -12,6 +12,10 @@ from tqdm import tqdm
 
 import Utils
 import ImageSimplify
+import ResizeLibrary
+import MappingLibrary
+import TransistionLibrary
+import ImageGenerator
 
 # Main Functions
 # V2 - Works with any 2 images - Matches Location and Color and does Transistion on both location and color
@@ -134,15 +138,15 @@ imgSize = (300, 170, 3)
 BGColors = [[[0, 0, 0]], [[0, 0, 0]]]
 ignoreColors_N = 1
 
-TransistionFunc_Location = Utils.LinearTransistion
+TransistionFunc_Location = TransistionLibrary.LinearTransistion
 TransistionParams_Location = None
-TransistionFunc_Color = Utils.LinearTransistion
+TransistionFunc_Color = TransistionLibrary.LinearTransistion
 TransistionParams_Color = None
 
-MappingFunc = Utils.Mapping_LocationColorCombined
+MappingFunc = MappingLibrary.Mapping_LocationColorCombined
 MappingParams = {'C_L_Ratio': 0.5, 'ColorSign': 1, 'LocationSign': 1}
 
-ResizeFunc = Utils.Resize_CustomSize
+ResizeFunc = ResizeLibrary.Resize_CustomSize
 ResizeParams = imgSize
 
 N = 50
@@ -177,8 +181,8 @@ else:
     Colors_2 = list(np.random.randint(0, 255, (N_Colors_2, 3)))
     ColorCounts_2 = list(np.random.randint(ColorCount_Range_2[0], ColorCount_Range_2[1], N_Colors_2))
 
-    I1 = Utils.GenerateRandomImage(imgSize, BGColors[0], Colors_1, ColorCounts_1)
-    I2 = Utils.GenerateRandomImage(imgSize, BGColors[1], Colors_2, ColorCounts_2)
+    I1 = ImageGenerator.GenerateRandomImage(imgSize, BGColors[0], Colors_1, ColorCounts_1)
+    I2 = ImageGenerator.GenerateRandomImage(imgSize, BGColors[1], Colors_2, ColorCounts_2)
 
     # I1 = np.zeros(imgSize, int)
     # Color1 = [255, 255, 0]

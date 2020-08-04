@@ -11,6 +11,10 @@ from tqdm import tqdm
 
 import Utils
 import ImageSimplify
+import ResizeLibrary
+import MappingLibrary
+import TransistionLibrary
+import ImageGenerator
 
 # Main Functions
 # Location Based Transistion - 2 Images
@@ -95,13 +99,13 @@ imgSize = (150, 150, 3)
 
 BGColor = [0, 0, 0]
 
-TransistionFunc = Utils.LinearTransistion
+TransistionFunc = TransistionLibrary.LinearTransistion
 TransistionParams = None
 
-MappingFunc = Utils.Mapping_maxDist
+MappingFunc = MappingLibrary.Mapping_maxDist
 MappingParams = None
 
-ResizeFunc = Utils.Resize_CustomSize
+ResizeFunc = ResizeLibrary.Resize_CustomSize
 ResizeParams = imgSize
 
 N = 50
@@ -109,7 +113,7 @@ N = 50
 displayDelay = 0.0001
 
 plotData = True
-saveData = True
+saveData = False
 
 # Run Code
 I1 = None
@@ -128,8 +132,8 @@ else:
     Colors = list(np.random.randint(0, 255, (N_Colors, 3)))
     ColorCounts = list(np.random.randint(ColorCount_Range[0], ColorCount_Range[1], N_Colors))
 
-    I1 = Utils.GenerateRandomImage(imgSize, BGColor, Colors, ColorCounts)
-    I2 = Utils.GenerateRandomImage(imgSize, BGColor, Colors, ColorCounts)
+    I1 = ImageGenerator.GenerateRandomImage(imgSize, BGColor, Colors, ColorCounts)
+    I2 = ImageGenerator.GenerateRandomImage(imgSize, BGColor, Colors, ColorCounts)
 
     # I1 = np.zeros(imgSize, int)
     # Color = [255, 255, 0]
@@ -166,7 +170,6 @@ GeneratedImgs = I2I_Transistion_LocationBased_ExactColorMatch(I1, I2, Transistio
 
 # Save
 if saveData:
-    print("OLDASDDSADA")
     saveMainPath = 'TestImgs/'
     saveFileName = 'LocationTrans.gif'
     mode = 'gif'
