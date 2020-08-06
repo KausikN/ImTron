@@ -133,7 +133,7 @@ mainPath = 'TestImgs/'
 imgName_1 = 'LOL.png'
 imgName_2 = 'Valo_1.jpg'
 
-imgSize = (300, 170, 3)
+imgSize = (615, 345, 3)
 
 BGColors = [[[0, 0, 0]], [[0, 0, 0]]]
 ignoreColors_N = 1
@@ -156,7 +156,7 @@ displayDelay = 0.0001
 
 plotData = True
 saveData = True
-loadData = True
+loadData = False
 
 # Run Code
 I1 = None
@@ -230,8 +230,8 @@ for i in range(ImagePaddingCount):
     GeneratedImgs.append(I2)
 # Save
 if saveData:
-    saveMainPath = 'TestImgs/'
-    saveFileName = 'LocationColorTrans.gif'
+    saveMainPath = 'Images/'
+    saveFileName = 'LocationColorTrans_GIF.gif'
     mode = 'gif'
     frameSize = (imgSize[0], imgSize[1])
     fps = 25
