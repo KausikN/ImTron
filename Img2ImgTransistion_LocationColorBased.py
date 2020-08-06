@@ -156,7 +156,7 @@ displayDelay = 0.0001
 
 plotData = True
 saveData = True
-loadData = False
+loadData = True
 
 # Run Code
 I1 = None
@@ -237,9 +237,12 @@ if saveData:
     fps = 25
     Utils.SaveImageSequence(GeneratedImgs, saveMainPath + saveFileName, mode=mode, frameSize=None, fps=fps)
     
-    if RandomImages or True:
+    if RandomImages:
         cv2.imwrite(saveMainPath + "LocationColorTrans_I1.png", I1)
         cv2.imwrite(saveMainPath + "LocationColorTrans_I2.png", I2)
+    else:
+        cv2.cvtColor(cv2.imwrite(saveMainPath + "LocationColorTrans_I1.png", I1), cv2.COLOR_BGR2RGB)
+        cv2.cvtColor(cv2.imwrite(saveMainPath + "LocationColorTrans_I2.png", I2), cv2.COLOR_BGR2RGB)
 
 # Display
 # if plotData:

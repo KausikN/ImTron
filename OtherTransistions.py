@@ -102,7 +102,7 @@ if not divergent:
 if saveData:
     saveMainPath = mainPath
 
-    pickle.dump(GeneratedImgs, saveMainPath + 'GeneratedImgs.p')
+    pickle.dump(GeneratedImgs, open(saveMainPath + 'GeneratedImgs.p', 'wb'))
 
     saveFileName = 'SinglePixelExplode.gif'
     mode = 'gif'
