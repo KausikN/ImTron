@@ -8,7 +8,7 @@ import random
 import numpy as np
 import matplotlib.pyplot as plt
 
-import GradientLibrary
+from Utils import GradientLibrary
 
 # Main Functions
 # Gradient Images
@@ -71,6 +71,7 @@ def GenerateTextImages(text, imgSize, coord, font=3, fontScale=1, fontColor=[0, 
     I = cv2.putText(I, text, coord, font, fontScale, tuple(fontColor), thickness)
     return I
 
+'''
 # Driver Code
 imgSize = (100, 100, 3)
 text = "K"
@@ -84,3 +85,4 @@ I = GenerateTextImages(text, imgSize, coord, font=font, fontScale=fontScale, fon
 print(I.ndim)
 plt.imshow(I)
 plt.show()
+'''

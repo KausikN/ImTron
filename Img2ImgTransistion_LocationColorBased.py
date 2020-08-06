@@ -33,7 +33,7 @@ def I2I_Transistion_LocationColorBased(I1, I2, TransistionFunc_Location, Transis
         ColorMap = pickle.load(open(mainPath + 'ColorMap.p', 'rb'))
 
     # Calculate Transistion Images
-    GeneratedImgs = ApplyTransistionToMapping(LocationMap, ColorMap, BGColors)
+    GeneratedImgs = ApplyTransistionToMapping(LocationMap, ColorMap, BGColors, TransistionFunc_Location, TransistionParams_Location, TransistionFunc_Color, TransistionParams_Color)
     
     return GeneratedImgs            
 
@@ -66,27 +66,27 @@ def CalculatePixelMap(I1, I2, MappingFunc, MappingParams, BGColors=[[np.array([0
 
     return LocationMap, ColorMap
 
-def ApplyTransistionToMapping(LocationMap, ColorMap, BGColors):
+def ApplyTransistionToMapping(LocationMap, ColorMap, BGColors, TransistionFunc_Location, TransistionParams_Location, TransistionFunc_Color, TransistionParams_Color):
     GeneratedImgs = []
 
     # Initialise Images and Vars
     Color_Movs = {}
     NColorsAdded_Imgs = []
-    BGColor_Mov = TransistionFunc_Color(BGColors[0][0], BGColors[1][0], N)
+    BGColor_Mov = TransistionFunc_Color(BGColors[0][0], BGColors[1][0], N, TransistionParams_Color)
     for n in range(N):
         GeneratedImgs.append(np.ones(I1.shape, int)*BGColor_Mov[n])
         NColorsAdded_Imgs.append(np.zeros((I1.shape[0], I1.shape[1])).astype(int))
     for cm in ColorMap:
         cmk = ','.join([','.join(np.array(cm[0]).astype(str)), ','.join(np.array(cm[1]).astype(str))])
         if cmk not in Color_Movs.keys():
-            Color_Movs[cmk] = TransistionFunc_Color(cm[0], cm[1], N)
+            Color_Movs[cmk] = TransistionFunc_Color(cm[0], cm[1], N, TransistionParams_Color)
 
     # Apply Transistion for Mappings
     print("Calculating Transistion Images...")
     for lc, cc in tqdm(zip(LocationMap, ColorMap), disable=False):
         cmk = ','.join([','.join(np.array(cc[0]).astype(str)), ','.join(np.array(cc[1]).astype(str))])
         # Location Movement
-        L_Mov = np.array(TransistionFunc_Location(lc[0], lc[1], N), int)
+        L_Mov = np.array(TransistionFunc_Location(lc[0], lc[1], N, TransistionParams_Location), int)
         X_Mov = L_Mov[:, 0]
         Y_Mov = L_Mov[:, 1]
         # Color Movement

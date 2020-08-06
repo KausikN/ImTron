@@ -95,7 +95,7 @@ mainPath = 'TestImgs/'
 imgName_1 = 'Test.png'
 imgName_2 = 'Test2.png'
 
-imgSize = (150, 150, 3)
+imgSize = (300, 300, 3)
 
 BGColor = [0, 0, 0]
 
@@ -113,7 +113,7 @@ N = 50
 displayDelay = 0.0001
 
 plotData = True
-saveData = False
+saveData = True
 
 # Run Code
 I1 = None
@@ -128,7 +128,7 @@ else:
     # Random Images
     # Params
     N_Colors = 10
-    ColorCount_Range = (0, 100)
+    ColorCount_Range = (0, 500)
     Colors = list(np.random.randint(0, 255, (N_Colors, 3)))
     ColorCounts = list(np.random.randint(ColorCount_Range[0], ColorCount_Range[1], N_Colors))
 
@@ -170,11 +170,11 @@ GeneratedImgs = I2I_Transistion_LocationBased_ExactColorMatch(I1, I2, Transistio
 
 # Save
 if saveData:
-    saveMainPath = 'TestImgs/'
-    saveFileName = 'LocationTrans.gif'
+    saveMainPath = 'Images/'
+    saveFileName = 'LocationTrans_GIF.gif'
     mode = 'gif'
     frameSize = (imgSize[0], imgSize[1])
-    fps = 25
+    fps = 60
     Utils.SaveImageSequence(GeneratedImgs, saveMainPath + saveFileName, mode=mode, frameSize=None, fps=fps)
 
     if RandomImages:

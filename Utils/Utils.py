@@ -14,6 +14,18 @@ from matplotlib.animation import FuncAnimation, PillowWriter
 from tqdm import tqdm
 
 # Main Functions
+def Grayscale2ColorFormat(I):
+    if I.ndim == 2:
+        I = np.reshape(I, (I.shape[0], I.shape[1], 1))
+    return I
+
+def ResizeImage(I, Size):
+    if Size is not None:
+        I = cv2.cvtColor(cv2.resize(I, (Size[0], Size[1])), cv2.COLOR_BGR2RGB)
+    else:
+        I = cv2.cvtColor(I, cv2.COLOR_BGR2RGB)
+    return I, I.shape
+
 def ResizeImages(I1, I2, ResizeFunc=None, ResizeParams=None):
     print("Before Resizing: I1:", I1.shape, "I2:", I2.shape)
     # Resize Match the 2 images - Final I1 and I2 must be of same size

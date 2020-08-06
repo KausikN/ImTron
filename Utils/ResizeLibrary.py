@@ -8,9 +8,9 @@ import numpy as np
 
 # Main Functions
 def Resize_CustomSize(I1, I2, Size):
-    if not Size == (I1.shape[0], I1.shape[1]):
+    if I1 is not None and not Size == (I1.shape[0], I1.shape[1]):
         I1 = cv2.resize(I1, (Size[0], Size[1]))
-    if not Size == (I2.shape[0], I2.shape[1]):
+    if I2 is not None and not Size == (I2.shape[0], I2.shape[1]):
         I2 = cv2.resize(I2, (Size[0], Size[1]))
     return I1, I2
 
