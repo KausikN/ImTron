@@ -31,5 +31,5 @@
    
    Single Pixel Explode Transistion
    
-   ![SinglePixelExplode I](https://github.com/KausikN/ImTron/blob/master/Images/SinglePixelExplode_I.png)
+   ![SinglePixelExplode I](https://github.com/KausikN/ImTron/blob/master/Images/SinglePixelExplode_I.jpg)
    ![SinglePixelExplode GIF](https://github.com/KausikN/ImTron/blob/master/Images/SinglePixelExplode_GIF.gif)
