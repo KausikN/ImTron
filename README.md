@@ -24,3 +24,12 @@
    ![Color I1](https://github.com/KausikN/ImTron/blob/master/Images/ColorTrans_I1.png)
    ![Color I2](https://github.com/KausikN/ImTron/blob/master/Images/ColorTrans_I2.png)
    ![Color Transistion](https://github.com/KausikN/ImTron/blob/master/Images/ColorTrans_GIF.gif)
+   
+## Other Transistions
+   - Various Other Transistions
+   - Can be exported as GIF or Video
+   
+   Single Pixel Explode Transistion
+   
+   ![SinglePixelExplode I](https://github.com/KausikN/ImTron/blob/master/Images/SinglePixelExplode_I.png)
+   ![SinglePixelExplode GIF](https://github.com/KausikN/ImTron/blob/master/Images/SinglePixelExplode_GIF.gif)
