@@ -33,7 +33,8 @@ def I2I_Transistion_LocationBased_ExactColorMatch(I1, I2, TransistionFunc, Trans
     for ck in tqdm(ColoursLocations_1.keys()):
         if ck in ColoursLocations_2.keys() and not ck == ','.join(BGColor.astype(str)):
             color = np.array(ck.split(','), int)
-            BestMapping = MappingFunc(ColoursLocations_1[ck], ColoursLocations_2[ck], MappingParams)
+            Data = {"1": ColoursLocations_1[ck], "2": ColoursLocations_2[ck]}
+            BestMapping = MappingFunc(Data, MappingParams)
             LocationMap[ck] = BestMapping
 
     # Generate Movement Transistion between Images using Custom Transistion Function

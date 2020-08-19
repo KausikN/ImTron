@@ -62,7 +62,8 @@ def CalculatePixelMap(I1, I2, MappingFunc, MappingParams, BGColors=[[np.array([0
     print("Location Count: ", len(Locations_1), "-", len(Locations_2))
     LocationMap = []
     ColorMap = []
-    LocationMap, ColorMap = MappingFunc(Locations_1, Colors_1, Locations_2, Colors_2, MappingParams)
+    Data = {"L1": Locations_1, "C1": Colors_1, "L2": Locations_2, "C2": Colors_2}
+    LocationMap, ColorMap = MappingFunc(Data, MappingParams)
 
     return LocationMap, ColorMap
 
@@ -127,11 +128,11 @@ def ImageColourLocations(I):
 # Driver Code
 # Params
 RandomImages = False
-SimplifyImages = True
+SimplifyImages = False
 
-mainPath = 'TestImgs/'
-imgName_1 = 'LOL.png'
-imgName_2 = 'Valo_1.jpg'
+mainPath = 'Images/'
+imgName_1 = 'Params.JPG'
+imgName_2 = 'UI.JPG'
 
 imgSize = (615, 345, 3)
 
@@ -143,8 +144,10 @@ TransistionParams_Location = None
 TransistionFunc_Color = TransistionLibrary.LinearTransistion
 TransistionParams_Color = None
 
-MappingFunc = MappingLibrary.Mapping_LocationColorCombined
-MappingParams = {'C_L_Ratio': 0.5, 'ColorSign': 1, 'LocationSign': 1}
+MappingFunc = MappingLibrary.Mapping_RandomMatcher_LocationColor
+MappingParams = None
+# MappingFunc = MappingLibrary.Mapping_LocationColorCombined
+# MappingParams = {'C_L_Ratio': 0.5, 'ColorSign': 1, 'LocationSign': 1}
 
 ResizeFunc = ResizeLibrary.Resize_CustomSize
 ResizeParams = imgSize
@@ -156,7 +159,7 @@ displayDelay = 0.0001
 
 plotData = True
 saveData = True
-loadData = True
+loadData = False
 
 # Run Code
 I1 = None
@@ -241,8 +244,8 @@ if saveData:
         cv2.imwrite(saveMainPath + "LocationColorTrans_I1.png", I1)
         cv2.imwrite(saveMainPath + "LocationColorTrans_I2.png", I2)
     else:
-        cv2.cvtColor(cv2.imwrite(saveMainPath + "LocationColorTrans_I1.png", I1), cv2.COLOR_BGR2RGB)
-        cv2.cvtColor(cv2.imwrite(saveMainPath + "LocationColorTrans_I2.png", I2), cv2.COLOR_BGR2RGB)
+        cv2.imwrite(saveMainPath + "LocationColorTrans_I1.png", I1)
+        cv2.imwrite(saveMainPath + "LocationColorTrans_I2.png", I2)
 
 # Display
 # if plotData:

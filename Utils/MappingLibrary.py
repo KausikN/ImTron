@@ -3,13 +3,16 @@ Library Containing many Mapping Functions
 '''
 
 # Imports
+import random
 import itertools
 import numpy as np
 from tqdm import tqdm
 
 # Main Functions
 # Location Only Mapping Functions
-def Mapping_BruteForce(L1, L2, options=None):
+def Mapping_BruteForce(Data, options=None):
+    L1 = Data['1']
+    L2 = Data['2']
     # Check all possible mappings and take mapping with (customisable) movement
     mappings = list(itertools.permutations(range(len(L2))))
     minError = -1
@@ -28,7 +31,10 @@ def Mapping_BruteForce(L1, L2, options=None):
         
     return ChosenMapping
 
-def Mapping_minDist(L1, L2, options=None):
+def Mapping_minDist(Data, options=None):
+    L1 = Data['1']
+    L2 = Data['2']
+
     minDist_Mapping = []
     for p1 in L1:
         minDist = -1
@@ -42,7 +48,10 @@ def Mapping_minDist(L1, L2, options=None):
         L2.remove(minDist_Point)
     return minDist_Mapping
 
-def Mapping_maxDist(L1, L2, options=None):
+def Mapping_maxDist(Data, options=None):
+    L1 = Data['1']
+    L2 = Data['2']
+
     maxDist_Mapping = []
     for p1 in L1:
         maxDist = -1
@@ -57,7 +66,11 @@ def Mapping_maxDist(L1, L2, options=None):
     return maxDist_Mapping
 
 # Pixel Mapping Functions - Location and Pixel Values
-def Mapping_LocationColorCombined(L1, C1, L2, C2, options=None):
+def Mapping_LocationColorCombined(Data, options=None):
+    L1 = Data['L1']
+    C1 = Data['C1']
+    L2 = Data['L2']
+    C2 = Data['C2']
     # Params
     C_L_Ratio = 0.5
     ColorSign = 1
@@ -103,4 +116,34 @@ def Mapping_LocationColorCombined(L1, C1, L2, C2, options=None):
             minDist_ColorMap.append([c1, C2[minDist_Index]])
         L2.pop(minDist_Index)
         C2.pop(minDist_Index)
+    return minDist_LocationMap, minDist_ColorMap
+
+def Mapping_RandomMatcher(Data, options=None):
+    L1 = Data['1']
+    L2 = Data['2']
+
+    minDist_LocationMap = []
+
+    ShuffleOrder = list(range(len(L1)))
+    random.shuffle(ShuffleOrder)
+    for i in tqdm(range(len(ShuffleOrder))):
+        minDist_LocationMap.append([L1[i], L2[ShuffleOrder[i]]])
+
+    return minDist_LocationMap
+
+def Mapping_RandomMatcher_LocationColor(Data, options=None):
+    L1 = Data['L1']
+    L2 = Data['L2']
+    C1 = Data['C1']
+    C2 = Data['C2']
+
+    minDist_LocationMap = []
+    minDist_ColorMap = []
+
+    ShuffleOrder = list(range(len(L1)))
+    random.shuffle(ShuffleOrder)
+    for i in tqdm(range(len(ShuffleOrder))):
+        minDist_LocationMap.append([L1[i], L2[ShuffleOrder[i]]])
+        minDist_ColorMap.append([C1[i], C2[ShuffleOrder[i]]])
+
     return minDist_LocationMap, minDist_ColorMap
