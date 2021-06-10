@@ -117,7 +117,7 @@ def I_Transistion_SinglePixelExplode_Fast(I, StartLocation, TransistionFuncs, N=
 mainPath = 'TestImgs/'
 imgName = 'Test2.jpg'
 
-imgSize = (250, 250, 3)
+imgSize = (300, 300, 3)
 
 StartLocation = (0.1, 0.1)
 relativeStart = True
@@ -143,6 +143,7 @@ saveData = True
 # Read the Image and Resize
 I = cv2.imread(mainPath + imgName)
 I, imgSize = Utils.ResizeImage(I, imgSize)
+print(imgSize)
 
 # Simplify BGColors
 I = ImageSimplify.ImageSimplify_RangeReplace(I, valRange=BGColorRange, replaceVal=BGColor)
