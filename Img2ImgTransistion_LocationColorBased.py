@@ -200,7 +200,7 @@ mainPath = 'TestImgs/'
 imgPath_1 = 'TestImgs/LOL.png'
 imgPath_2 = 'TestImgs/Valo_1.jpg'
 
-imgSize = (100, 100, 3)
+imgSize = (615, 345, 3)
 
 BGColors = [[[0, 0, 0]], [[15, 25, 35]]]
 ignoreColors_N = 1
@@ -211,7 +211,8 @@ TransistionFuncs_Location = {
 }
 TransistionFunc_Color = functools.partial(TransistionLibrary.LinearTransistion_Fast)
 
-MappingFunc = functools.partial(MappingLibrary.Mapping_LocationColorCombined_Fast, options={'C_L_Ratio': 0.5, 'ColorSign': 1, 'LocationSign': 1})
+# MappingFunc = functools.partial(MappingLibrary.Mapping_LocationColorCombined_Fast, options={'C_L_Ratio': 0.5, 'ColorSign': -1, 'LocationSign': -1})
+MappingFunc = MappingLibrary.Mapping_RandomMatcher_LocationColor
 
 ResizeFunc = functools.partial(ResizeLibrary.Resize_CustomSize, Size=imgSize)
 
@@ -220,8 +221,8 @@ ImagePaddingCount = 5
 
 displayDelay = 0.0001
 
-plotData = True
-saveData = False
+plotData = False
+saveData = True
 loadData = False
 
 # Run Code
