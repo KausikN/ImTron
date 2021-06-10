@@ -305,11 +305,11 @@ if saveData:
     Utils.SaveImageSequence(GeneratedImgs, saveMainPath + saveFileName, mode=mode, frameSize=None, fps=fps)
     
     if RandomImages:
-        cv2.imwrite(saveMainPath + "LocationColorTrans_I1.png", I1)
-        cv2.imwrite(saveMainPath + "LocationColorTrans_I2.png", I2)
+        cv2.imwrite(saveMainPath + "LocationColorTrans_I1.png", cv2.cvtColor(I1, cv2.COLOR_BGR2RGB))
+        cv2.imwrite(saveMainPath + "LocationColorTrans_I2.png", cv2.cvtColor(I2, cv2.COLOR_BGR2RGB))
     else:
-        cv2.imwrite(saveMainPath + "LocationColorTrans_I1.png", I1)
-        cv2.imwrite(saveMainPath + "LocationColorTrans_I2.png", I2)
+        cv2.imwrite(saveMainPath + "LocationColorTrans_I1.png", cv2.cvtColor(I1, cv2.COLOR_BGR2RGB))
+        cv2.imwrite(saveMainPath + "LocationColorTrans_I2.png", cv2.cvtColor(I2, cv2.COLOR_BGR2RGB))
 
 # Display
 # if plotData:

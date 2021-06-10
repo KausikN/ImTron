@@ -31,5 +31,5 @@
    
    Single Pixel Explode Transistion
    
-   ![SinglePixelExplode I](Images/SinglePixelExplode_I.jpg)
+   ![SinglePixelExplode I](Images/SinglePixelExplode_I.png)
    ![SinglePixelExplode GIF](Images/SinglePixelExplode_GIF.gif)
