@@ -117,7 +117,7 @@ def I_Transistion_SinglePixelExplode_Fast(I, StartLocation, TransistionFuncs, N=
 mainPath = 'TestImgs/'
 imgName = 'Test2.jpg'
 
-imgSize = (500, 500, 3)
+imgSize = (250, 250, 3)
 
 StartLocation = (0.1, 0.1)
 relativeStart = True
@@ -172,7 +172,7 @@ if saveData:
     # pickle.dump(GeneratedImgs, open(saveMainPath + 'GeneratedImgs.p', 'wb'))
     cv2.imwrite(saveMainPath + "SinglePixelExplode_I.png", cv2.cvtColor(I, cv2.COLOR_BGR2RGB))
 
-    saveFileName = 'SinglePixelExplode_2.gif'
+    saveFileName = 'SinglePixelExplode.gif'
     mode = 'gif'
     frameSize = (imgSize[0], imgSize[1])
     fps = 120
