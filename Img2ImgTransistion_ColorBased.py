@@ -4,6 +4,7 @@ This Script allows generating a transistion from 1 image to another or a chain o
 
 # Imports
 import cv2
+import functools
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation, PillowWriter
@@ -32,28 +33,36 @@ def I2I_Transistion_ColorGradient(I1, I2, TransistionFunc, N=5):
 
     return GeneratedImgs
 
+# Colour Based Gradient Transistion - Numpy accelerated - Can use only Numpy TransistionFuncs
+def I2I_Transistion_ColorGradient_Fast(I1, I2, TransistionFunc, N=5):
+    GeneratedImgs = []
+
+    # Apply Transistion for all pixels in 2 images
+    GeneratedImgs = TransistionFunc(I1, I2, N)
+    GeneratedImgs = list(GeneratedImgs)
+
+    return GeneratedImgs
+
 
 # Driver Code
 # Params
 RandomImages = True
 
-mainPath = 'TestImgs/'
-imgName_1 = 'Test.jpg'
-imgName_2 = 'Test2.jpg'
+imgPath_1 = 'TestImgs/Test.jpg'
+imgPath_2 = 'TestImgs/Test2.jpg'
 
 imgSize = (300, 300, 3)
 
-TransistionFunc = TransistionLibrary.LinearTransistion
+TransistionFunc = TransistionLibrary.LinearTransistion_Fast
 
-ResizeFunc = ResizeLibrary.Resize_MaxSize
-ResizeParams = None
+ResizeFunc = functools.partial(ResizeLibrary.Resize_MaxSize)
 
-N = 50
+N = 5
 
 displayDelay = 0.01
 
 plotData = True
-saveData = True
+saveData = False
 
 # Run Code
 I1 = None
@@ -61,15 +70,15 @@ I2 = None
 
 if not RandomImages:
     # Read Images
-    I1 = cv2.cvtColor(cv2.imread(mainPath + imgName_1), cv2.COLOR_BGR2RGB)
-    I2 = cv2.cvtColor(cv2.imread(mainPath + imgName_2), cv2.COLOR_BGR2RGB)
+    I1 = cv2.cvtColor(cv2.imread(imgPath_1), cv2.COLOR_BGR2RGB)
+    I2 = cv2.cvtColor(cv2.imread(imgPath_2), cv2.COLOR_BGR2RGB)
 else:
     # Random Images
     I1 = ImageGenerator.GenerateGradient_LinearRadial(np.array([255, 255, 255]), np.array([255, 0, 0]), imgSize)
     I2 = ImageGenerator.GenerateGradient_LinearRadial(np.array([0, 0, 255]), np.array([255, 255, 255]), imgSize)
 
 # Resize
-I1, I2, imgSize = Utils.ResizeImages(I1, I2, ResizeFunc, ResizeParams)
+I1, I2, imgSize = Utils.ResizeImages(I1, I2, ResizeFunc)
 
 # Display
 if plotData:
@@ -80,7 +89,7 @@ if plotData:
     plt.show()
 
 # Generate Transistion Images
-GeneratedImgs = I2I_Transistion_ColorGradient(I1, I2, TransistionFunc, N)
+GeneratedImgs = I2I_Transistion_ColorGradient_Fast(I1, I2, TransistionFunc, N)
 # Loop Back to 1st image
 GeneratedImgs.extend(GeneratedImgs[::-1])
 

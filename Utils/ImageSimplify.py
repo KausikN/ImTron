@@ -156,6 +156,7 @@ def ImageColours_Describe(I):
     return ColoursCount, CountColours
 
 # Simplify Functions
+# Clustering Method
 def ImageSimplify_ColorBased(I, maxExtraColours, minColourDiff=50, DiffFunc=CheckColourCloseness_Dist_L1Norm, DistanceFunc=EuclideanDistance):
     DistanceFuncName = DistanceFunc.__name__
 
@@ -167,3 +168,17 @@ def ImageSimplify_ColorBased(I, maxExtraColours, minColourDiff=50, DiffFunc=Chec
     I_r, ReplacementsCounts = Image_PixelClusterReplace(I, TopColours, ColoursCount, DistanceFunc=DistanceFunc)
     
     return I_r, TopColours
+
+# Range Replace Method
+def ImageSimplify_RangeReplace(I, valRange=[[0, 0, 0], [50, 50, 50]], replaceVal=[0, 0, 0]):
+    if I.ndim <= 2:
+        I = np.reshape(I, (I.shape[0], I.shape[1], 1))
+
+    I_replaceMask = np.ones(I.shape[:2], dtype=bool)
+    for c in range(I.shape[-1]):
+        I_replaceMask = I_replaceMask & (I[:, :, c] >= valRange[0][c]) & (I[:, :, c] <= valRange[1][c])
+
+    I_simplified = np.copy(I)
+    I_simplified[I_replaceMask] = replaceVal
+
+    return I_simplified

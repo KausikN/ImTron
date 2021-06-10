@@ -65,6 +65,16 @@ def GenerateRandomImage(imgSize, BGColor, Colors, ColorCounts):
                 I[i, j] = Colors[I_Colors[i, j]]
     return I
 
+# Shuffled Image
+def GenerateShuffledImage(I):
+    if I.ndim <= 2:
+        I = np.reshape(I, (I.shape[0], I.shape[1], 1))
+    I_flat = np.reshape(I, (I.shape[0]*I.shape[1], I.shape[2]))
+    I_shuffled_flat = np.copy(I_flat)
+    np.random.shuffle(I_shuffled_flat)
+    I_shuffled = np.reshape(I_shuffled_flat, (I.shape[0], I.shape[1], I.shape[2]))
+    return I_shuffled
+
 # Text Images
 def GenerateTextImages(text, imgSize, coord, font=3, fontScale=1, fontColor=[0, 0, 0], BGColor=[255, 255, 255], thickness=1):
     I = np.ones(imgSize, int) * np.array(BGColor)
