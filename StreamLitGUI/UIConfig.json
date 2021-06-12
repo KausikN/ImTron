@@ -1,0 +1,10 @@
+{
+    "PROJECT_NAME": "ImTron",
+    "PROJECT_LINK": "https://github.com/KausikN/ImTron",
+
+    "PROJECT_DESC": "ImTron is a tool to generate Transistion Images connecting 2 or more Images and generating GIFs or Videos from few images",
+
+    "PROJECT_README": "README.md",
+
+    "PROJECT_MODES": ["Color Based Transistion", "Location Based Transistion", "Image to Image Transistion", "Single Pixel Transistion"]
+}

@@ -44,67 +44,67 @@ def I2I_Transistion_ColorGradient_Fast(I1, I2, TransistionFunc, N=5):
     return GeneratedImgs
 
 
-# Driver Code
-# Params
-RandomImages = True
+# # Driver Code
+# # Params
+# RandomImages = True
 
-imgPath_1 = 'TestImgs/Test.jpg'
-imgPath_2 = 'TestImgs/Test2.jpg'
+# imgPath_1 = 'TestImgs/Test.jpg'
+# imgPath_2 = 'TestImgs/Test2.jpg'
 
-imgSize = (300, 300, 3)
+# imgSize = (300, 300, 3)
 
-TransistionFunc = TransistionLibrary.LinearTransistion_Fast
+# TransistionFunc = TransistionLibrary.LinearTransistion_Fast
 
-ResizeFunc = functools.partial(ResizeLibrary.Resize_MaxSize)
+# ResizeFunc = functools.partial(ResizeLibrary.Resize_MaxSize)
 
-N = 5
+# N = 5
 
-displayDelay = 0.01
+# displayDelay = 0.01
 
-plotData = True
-saveData = False
+# plotData = True
+# saveData = False
 
-# Run Code
-I1 = None
-I2 = None
+# # Run Code
+# I1 = None
+# I2 = None
 
-if not RandomImages:
-    # Read Images
-    I1 = cv2.cvtColor(cv2.imread(imgPath_1), cv2.COLOR_BGR2RGB)
-    I2 = cv2.cvtColor(cv2.imread(imgPath_2), cv2.COLOR_BGR2RGB)
-else:
-    # Random Images
-    I1 = ImageGenerator.GenerateGradient_LinearRadial(np.array([255, 255, 255]), np.array([255, 0, 0]), imgSize)
-    I2 = ImageGenerator.GenerateGradient_LinearRadial(np.array([0, 0, 255]), np.array([255, 255, 255]), imgSize)
+# if not RandomImages:
+#     # Read Images
+#     I1 = cv2.cvtColor(cv2.imread(imgPath_1), cv2.COLOR_BGR2RGB)
+#     I2 = cv2.cvtColor(cv2.imread(imgPath_2), cv2.COLOR_BGR2RGB)
+# else:
+#     # Random Images
+#     I1 = ImageGenerator.GenerateGradient_LinearRadial(np.array([255, 255, 255]), np.array([255, 0, 0]), imgSize)
+#     I2 = ImageGenerator.GenerateGradient_LinearRadial(np.array([0, 0, 255]), np.array([255, 255, 255]), imgSize)
 
-# Resize
-I1, I2, imgSize = Utils.ResizeImages(I1, I2, ResizeFunc)
+# # Resize
+# I1, I2, imgSize = Utils.ResizeImages(I1, I2, ResizeFunc)
 
-# Display
-if plotData:
-    plt.subplot(1, 2, 1)
-    plt.imshow(I1)
-    plt.subplot(1, 2, 2)
-    plt.imshow(I2)
-    plt.show()
+# # Display
+# if plotData:
+#     plt.subplot(1, 2, 1)
+#     plt.imshow(I1)
+#     plt.subplot(1, 2, 2)
+#     plt.imshow(I2)
+#     plt.show()
 
-# Generate Transistion Images
-GeneratedImgs = I2I_Transistion_ColorGradient_Fast(I1, I2, TransistionFunc, N)
-# Loop Back to 1st image
-GeneratedImgs.extend(GeneratedImgs[::-1])
+# # Generate Transistion Images
+# GeneratedImgs = I2I_Transistion_ColorGradient_Fast(I1, I2, TransistionFunc, N)
+# # Loop Back to 1st image
+# GeneratedImgs.extend(GeneratedImgs[::-1])
 
-# Save
-if saveData:
-    saveMainPath = 'TestImgs/'
-    saveFileName = 'ColorTrans.gif'
-    mode = 'gif'
-    frameSize = (imgSize[0], imgSize[1])
-    fps = 25
-    Utils.SaveImageSequence(GeneratedImgs, saveMainPath + saveFileName, mode=mode, frameSize=None, fps=fps)
+# # Save
+# if saveData:
+#     saveMainPath = 'TestImgs/'
+#     saveFileName = 'ColorTrans.gif'
+#     mode = 'gif'
+#     frameSize = (imgSize[0], imgSize[1])
+#     fps = 25
+#     Utils.SaveImageSequence(GeneratedImgs, saveMainPath + saveFileName, mode=mode, frameSize=None, fps=fps)
     
-    if RandomImages:
-        cv2.imwrite(saveMainPath + "ColorTrans_I1.png", I1)
-        cv2.imwrite(saveMainPath + "ColorTrans_I2.png", I2)
+#     if RandomImages:
+#         cv2.imwrite(saveMainPath + "ColorTrans_I1.png", I1)
+#         cv2.imwrite(saveMainPath + "ColorTrans_I2.png", I2)
 
-# Display
-Utils.DisplayImageSequence(GeneratedImgs, displayDelay)
+# # Display
+# Utils.DisplayImageSequence(GeneratedImgs, displayDelay)

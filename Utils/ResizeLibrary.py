@@ -22,6 +22,14 @@ def Resize_MaxSize(I1, I2):
         I2 = cv2.resize(I2, CommonSize)
     return I1, I2
 
+def Resize_MinSize(I1, I2):
+    CommonSize = (min(I1.shape[0], I2.shape[0]), min(I1.shape[1], I2.shape[1]))
+    if not CommonSize == (I1.shape[0], I1.shape[1]):
+        I1 = cv2.resize(I1, CommonSize)
+    if not CommonSize == (I2.shape[0], I2.shape[1]):
+        I2 = cv2.resize(I2, CommonSize)
+    return I1, I2
+
 def Resize_PaddingFillMaxSize(I1, I2):
     # Colour Images
     if I1.ndim == 3:

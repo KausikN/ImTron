@@ -139,100 +139,100 @@ def ImageColourLocations(I):
             
     return ColoursLocations
 
-# Driver Code
-# Params
-RandomImages = True
-SimplifyImages = False
+# # Driver Code
+# # Params
+# RandomImages = True
+# SimplifyImages = False
 
-imgPath_1 = 'TestImgs/Test.png'
-imgPath_2 = 'TestImgs/Test2.png'
+# imgPath_1 = 'TestImgs/Test.png'
+# imgPath_2 = 'TestImgs/Test2.png'
 
-imgSize = (100, 100, 3)
+# imgSize = (100, 100, 3)
 
-BGColor = [0, 0, 0]
+# BGColor = [0, 0, 0]
 
-TransistionFuncs = {
-    "X": TransistionLibrary.LinearTransistion_Fast,
-    "Y": TransistionLibrary.LinearTransistion_Fast
-}
+# TransistionFuncs = {
+#     "X": TransistionLibrary.LinearTransistion_Fast,
+#     "Y": TransistionLibrary.LinearTransistion_Fast
+# }
 
-MappingFunc = MappingLibrary.Mapping_maxDist_Fast
+# MappingFunc = MappingLibrary.Mapping_maxDist_Fast
 
-ResizeFunc = functools.partial(ResizeLibrary.Resize_CustomSize, Size=imgSize)
+# ResizeFunc = functools.partial(ResizeLibrary.Resize_CustomSize, Size=imgSize)
 
-N = 50
+# N = 50
 
-displayDelay = 0.0001
+# displayDelay = 0.0001
 
-plotData = True
-saveData = False
+# plotData = True
+# saveData = False
 
-# Run Code
-I1 = None
-I2 = None
+# # Run Code
+# I1 = None
+# I2 = None
 
-if not RandomImages:
-    # Read Images
-    I1 = cv2.cvtColor(cv2.imread(imgPath_1), cv2.COLOR_BGR2RGB)
-    I2 = cv2.cvtColor(cv2.imread(imgPath_2), cv2.COLOR_BGR2RGB)
+# if not RandomImages:
+#     # Read Images
+#     I1 = cv2.cvtColor(cv2.imread(imgPath_1), cv2.COLOR_BGR2RGB)
+#     I2 = cv2.cvtColor(cv2.imread(imgPath_2), cv2.COLOR_BGR2RGB)
 
-else:
-    # Random Images
-    # Params
-    N_Colors = 10
-    ColorCount_Range = (0, 100)
-    Colors = list(np.random.randint(0, 255, (N_Colors, 3)))
-    ColorCounts = list(np.random.randint(ColorCount_Range[0], ColorCount_Range[1], N_Colors))
+# else:
+#     # Random Images
+#     # Params
+    # N_Colors = 10
+    # ColorCount_Range = (0, 100)
+    # Colors = list(np.random.randint(0, 255, (N_Colors, 3)))
+    # ColorCounts = list(np.random.randint(ColorCount_Range[0], ColorCount_Range[1], N_Colors))
 
-    I1 = ImageGenerator.GenerateRandomImage(imgSize, BGColor, Colors, ColorCounts)
-    I2 = ImageGenerator.GenerateShuffledImage(I1)
-    # I2 = ImageGenerator.GenerateRandomImage(imgSize, BGColor, Colors, ColorCounts)
+#     I1 = ImageGenerator.GenerateRandomImage(imgSize, BGColor, Colors, ColorCounts)
+#     I2 = ImageGenerator.GenerateShuffledImage(I1)
+#     # I2 = ImageGenerator.GenerateRandomImage(imgSize, BGColor, Colors, ColorCounts)
 
-    # I1 = np.zeros(imgSize, int)
-    # Color = [255, 255, 0]
-    # I1[0, :] = Color
-    # I1[-1, :] = Color
-    # I1[:, 0] = Color
-    # I1[:, -1] = Color
-    # I2 = I1.copy()
+#     # I1 = np.zeros(imgSize, int)
+#     # Color = [255, 255, 0]
+#     # I1[0, :] = Color
+#     # I1[-1, :] = Color
+#     # I1[:, 0] = Color
+#     # I1[:, -1] = Color
+#     # I2 = I1.copy()
 
-if SimplifyImages:
-    # Image Color Simplification
-    # Params
-    maxExtraColours = 5
-    minColourDiff = 0
-    DiffFunc = ImageSimplify.CheckColourCloseness_Dist_L2Norm
-    DistanceFunc = ImageSimplify.EuclideanDistance
+# if SimplifyImages:
+#     # Image Color Simplification
+#     # Params
+#     maxExtraColours = 5
+#     minColourDiff = 0
+#     DiffFunc = ImageSimplify.CheckColourCloseness_Dist_L2Norm
+#     DistanceFunc = ImageSimplify.EuclideanDistance
 
-    I1 = ImageSimplify.ImageSimplify_ColorBased(I1, maxExtraColours, minColourDiff, DiffFunc, DistanceFunc)
-    I2 = ImageSimplify.ImageSimplify_ColorBased(I2, maxExtraColours, minColourDiff, DiffFunc, DistanceFunc)
+#     I1 = ImageSimplify.ImageSimplify_ColorBased(I1, maxExtraColours, minColourDiff, DiffFunc, DistanceFunc)
+#     I2 = ImageSimplify.ImageSimplify_ColorBased(I2, maxExtraColours, minColourDiff, DiffFunc, DistanceFunc)
 
-# Resize
-I1, I2, imgSize = Utils.ResizeImages(I1, I2, ResizeFunc)
+# # Resize
+# I1, I2, imgSize = Utils.ResizeImages(I1, I2, ResizeFunc)
 
-# Show Image
-if plotData:
-    plt.subplot(1, 2, 1)
-    plt.imshow(I1)
-    plt.subplot(1, 2, 2)
-    plt.imshow(I2)
-    plt.show()
+# # Show Image
+# if plotData:
+#     plt.subplot(1, 2, 1)
+#     plt.imshow(I1)
+#     plt.subplot(1, 2, 2)
+#     plt.imshow(I2)
+#     plt.show()
 
-# Generate Transistion Images
-GeneratedImgs = I2I_Transistion_LocationBased_ExactColorMatch_Fast(I1, I2, TransistionFuncs, MappingFunc, N, np.array(BGColor))
+# # Generate Transistion Images
+# GeneratedImgs = I2I_Transistion_LocationBased_ExactColorMatch_Fast(I1, I2, TransistionFuncs, MappingFunc, N, np.array(BGColor))
 
-# Save
-if saveData:
-    saveMainPath = 'Images/'
-    savePath= 'Images/LocationTrans_GIF.gif'
-    mode = 'gif'
-    frameSize = (imgSize[0], imgSize[1])
-    fps = 60
-    Utils.SaveImageSequence(GeneratedImgs, savePath, mode=mode, frameSize=None, fps=fps)
+# # Save
+# if saveData:
+#     saveMainPath = 'Images/'
+#     savePath= 'Images/LocationTrans_GIF.gif'
+#     mode = 'gif'
+#     frameSize = (imgSize[0], imgSize[1])
+#     fps = 60
+#     Utils.SaveImageSequence(GeneratedImgs, savePath, mode=mode, frameSize=None, fps=fps)
 
-    if RandomImages:
-        cv2.imwrite(saveMainPath + "LocationTrans_I1.png", I1)
-        cv2.imwrite(saveMainPath + "LocationTrans_I2.png", I2)
+#     if RandomImages:
+#         cv2.imwrite(saveMainPath + "LocationTrans_I1.png", I1)
+#         cv2.imwrite(saveMainPath + "LocationTrans_I2.png", I2)
 
-# Display
-Utils.DisplayImageSequence(GeneratedImgs, displayDelay)
+# # Display
+# Utils.DisplayImageSequence(GeneratedImgs, displayDelay)

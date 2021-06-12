@@ -150,7 +150,7 @@ def Mapping_LocationColorCombined(Data, options={"C_L_Ratio": 0.5, "ColorSign": 
         C2.pop(minDist_Index)
     return minDist_LocationMap, minDist_ColorMap
 
-def Mapping_RandomMatcher(Data, options=None):
+def Mapping_RandomMatcher(Data):
     L1 = Data['1']
     L2 = Data['2']
 
@@ -163,7 +163,7 @@ def Mapping_RandomMatcher(Data, options=None):
 
     return minDist_LocationMap
 
-def Mapping_RandomMatcher_LocationColor(Data, options=None):
+def Mapping_RandomMatcher_LocationColor(Data):
     L1 = Data['L1']
     L2 = Data['L2']
     C1 = Data['C1']
