@@ -1,5 +1,5 @@
 """
-Stream lit GUI for hosting ImageColoriser
+Stream lit GUI for hosting ImTron
 """
 
 # Imports
