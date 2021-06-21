@@ -1,7 +1,17 @@
 # ImTron
  ImTron is a tool to generate Transistion Images connecting 2 or more Images and generating GIFs or Videos from few images
+
+# GUI
+ - Install streamlit using
+   ```
+   pip install streamlit
+   ```
+ - Launch Streamlit GUI in the repo folder by
+   ```
+   streamlit run app.py
+   ```
  
-## Combined Transistions
+# Combined Transistions
    - Generates transistion images based on combination of all factors
    - Can be exported as GIF or Video
    
@@ -9,7 +19,7 @@
    ![Combined I2](Images/LocationColorTrans_I2.png)
    ![Combined Transistion](Images/LocationColorTrans_GIF.gif)
    
-## Location Based Transistions
+# Location Based Transistions
    - Generates transistion images based on location mapping between input image pixels
    - Can be exported as GIF or Video
    
@@ -17,7 +27,7 @@
    ![Location I2](Images/LocationTrans_I2.png)
    ![Location Transistion](Images/LocationTrans_GIF.gif)
    
-## Colour Based Transistions
+# Colour Based Transistions
    - Generates transistion images based on colour of corresponding pixels in input images
    - Can be exported as GIF or Video
    
@@ -25,7 +35,7 @@
    ![Color I2](Images/ColorTrans_I2.png)
    ![Color Transistion](Images/ColorTrans_GIF.gif)
    
-## Other Transistions
+# Other Transistions
    - Various Other Transistions
    - Can be exported as GIF or Video
    

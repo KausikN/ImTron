@@ -172,11 +172,30 @@ def Mapping_RandomMatcher_LocationColor(Data):
     minDist_LocationMap = []
     minDist_ColorMap = []
 
+    # 2 shud always have more or equal elements than 1
+    swapped = False
+    if len(L1) > len(L2):
+        swapped = True
+        L1, L2 = L2, L1
+        C1, C2 = C2, C1
+
+    # Add extra elements to match sizes of L1 and L2
+    L1 = L1 * int(len(L2)/len(L1))
+    C1 = C1 * int(len(C2)/len(C1))
+    extraIndices = np.random.choice(range(len(L1)), size=(len(L2) - len(L1)))
+    L1 = L1 + list(np.array(L1)[extraIndices])
+    C1 = C1 + list(np.array(C1)[extraIndices])
+
     ShuffleOrder = list(range(len(L1)))
     random.shuffle(ShuffleOrder)
+
     for i in tqdm(range(len(ShuffleOrder))):
-        minDist_LocationMap.append([L1[i], L2[ShuffleOrder[i]]])
-        minDist_ColorMap.append([C1[i], C2[ShuffleOrder[i]]])
+        if swapped:
+            minDist_LocationMap.append([L2[ShuffleOrder[i]], L1[i]])
+            minDist_ColorMap.append([C2[ShuffleOrder[i]], C1[i]])
+        else:
+            minDist_LocationMap.append([L1[i], L2[ShuffleOrder[i]]])
+            minDist_ColorMap.append([C1[i], C2[ShuffleOrder[i]]])
 
     return minDist_LocationMap, minDist_ColorMap
 
@@ -197,6 +216,13 @@ def Mapping_LocationColorCombined_Fast(Data, options={"C_L_Ratio": 0.5, "ColorSi
         swapped = True
         L1, L2 = L2, L1
         C1, C2 = C2, C1
+
+    # Add extra elements to match sizes of L1 and L2
+    L1 = L1 * int(len(L2)/len(L1))
+    C1 = C1 * int(len(C2)/len(C1))
+    extraIndices = np.random.choice(range(len(L1)), size=(len(L2) - len(L1)))
+    L1 = L1 + list(np.array(L1)[extraIndices])
+    C1 = C1 + list(np.array(C1)[extraIndices])
 
     L1 = np.array(L1)
     L2 = np.array(L2)

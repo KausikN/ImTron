@@ -34,7 +34,7 @@ def I2I_Transistion_LocationColorBased(I1, I2, TransistionFuncs_Location, Transi
         ColorMap = pickle.load(open(mainPath + 'ColorMap.p', 'rb'))
 
     # Calculate Transistion Images
-    GeneratedImgs = ApplyTransistionToMapping(LocationMap, ColorMap, BGColors, TransistionFuncs_Location, TransistionFunc_Color)
+    GeneratedImgs = ApplyTransistionToMapping(LocationMap, ColorMap, BGColors, TransistionFuncs_Location, TransistionFunc_Color, N, I1.shape)
     
     return GeneratedImgs
 
@@ -49,12 +49,12 @@ def CalculatePixelMap(I1, I2, MappingFunc, BGColors=[[np.array([0, 0, 0])], [np.
     Colors_2 = []
     for ck in ColoursLocations_1.keys():
         color = np.array(ck.split(','), int)
-        if color not in BGColors[0]:
+        if color not in np.array(BGColors[0]):
             Locations_1.extend(ColoursLocations_1[ck])
             Colors_1.extend([color]*len(ColoursLocations_1[ck]))
     for ck in ColoursLocations_2.keys():
         color = np.array(ck.split(','), int)
-        if color not in BGColors[1]:
+        if color not in np.array(BGColors[1]):
             Locations_2.extend(ColoursLocations_2[ck])
             Colors_2.extend([color]*len(ColoursLocations_2[ck]))
 
@@ -68,7 +68,7 @@ def CalculatePixelMap(I1, I2, MappingFunc, BGColors=[[np.array([0, 0, 0])], [np.
 
     return LocationMap, ColorMap
 
-def ApplyTransistionToMapping(LocationMap, ColorMap, BGColors, TransistionFuncs_Location, TransistionFunc_Color):
+def ApplyTransistionToMapping(LocationMap, ColorMap, BGColors, TransistionFuncs_Location, TransistionFunc_Color, N, size):
     GeneratedImgs = []
 
     # Initialise Images and Vars
@@ -76,8 +76,8 @@ def ApplyTransistionToMapping(LocationMap, ColorMap, BGColors, TransistionFuncs_
     NColorsAdded_Imgs = []
     BGColor_Mov = TransistionFunc_Color(BGColors[0][0], BGColors[1][0], N)
     for n in range(N):
-        GeneratedImgs.append(np.ones(I1.shape, int)*BGColor_Mov[n])
-        NColorsAdded_Imgs.append(np.zeros((I1.shape[0], I1.shape[1])).astype(int))
+        GeneratedImgs.append(np.ones(size, int)*BGColor_Mov[n])
+        NColorsAdded_Imgs.append(np.zeros((size[0], size[1])).astype(int))
     for cm in ColorMap:
         cmk = ','.join([','.join(np.array(cm[0]).astype(str)), ','.join(np.array(cm[1]).astype(str))])
         if cmk not in Color_Movs.keys():
@@ -109,35 +109,37 @@ def ApplyTransistionToMapping(LocationMap, ColorMap, BGColors, TransistionFuncs_
     return GeneratedImgs
 
 # Fast Versions -- Numpy Accelerated
-def I2I_Transistion_LocationColorBased_Fast(I1, I2, TransistionFuncs_Location, TransistionFunc_Color, MappingFunc, N=5, BGColors=[[np.array([0, 0, 0])], [np.array([0, 0, 0])]], loadData=False):
+def I2I_Transistion_LocationColorBased_Fast(I1, I2, TransistionFuncs_Location, TransistionFuncs_Color, MappingFunc, N=5, BGColors=[[np.array([0, 0, 0])], [np.array([0, 0, 0])]], loadData=False):
     if not loadData:
         # Calculate Pixel Mapping
         LocationMap, ColorMap = CalculatePixelMap(I1, I2, MappingFunc, BGColors)
 
         # Save Maps
-        pickle.dump(LocationMap, open(mainPath + 'LocationMap.p', 'wb'))
-        pickle.dump(ColorMap, open(mainPath + 'ColorMap.p', 'wb'))
+        # pickle.dump(LocationMap, open(mainPath + 'LocationMap.p', 'wb'))
+        # pickle.dump(ColorMap, open(mainPath + 'ColorMap.p', 'wb'))
     else:
+        pass
         # Load Maps
-        LocationMap = pickle.load(open(mainPath + 'LocationMap.p', 'rb'))
-        ColorMap = pickle.load(open(mainPath + 'ColorMap.p', 'rb'))
+        # LocationMap = pickle.load(open(mainPath + 'LocationMap.p', 'rb'))
+        # ColorMap = pickle.load(open(mainPath + 'ColorMap.p', 'rb'))
 
     # Calculate Transistion Images
-    GeneratedImgs = ApplyTransistionToMapping_Fast(LocationMap, ColorMap, BGColors, TransistionFuncs_Location, TransistionFunc_Color)
+    GeneratedImgs = ApplyTransistionToMapping_Fast(LocationMap, ColorMap, BGColors, TransistionFuncs_Location, TransistionFuncs_Color, N, I1.shape)
     
     return GeneratedImgs
 
-def ApplyTransistionToMapping_Fast(LocationMap, ColorMap, BGColors, TransistionFuncs_Location, TransistionFunc_Color):
+def ApplyTransistionToMapping_Fast(LocationMap, ColorMap, BGColors, TransistionFuncs_Location, TransistionFuncs_Color, N, size):
     GeneratedImgs = []
 
     # Initialise Images and Vars
-    
-    Color_Mov = []
     NColorsAdded_Imgs = []
-    BGColor_Mov = TransistionFunc_Color(BGColors[0][0], BGColors[1][0], N)
+    BGColor_R_Mov = TransistionFuncs_Color['R'](BGColors[0][0][0], BGColors[1][0][0], N)
+    BGColor_G_Mov = TransistionFuncs_Color['G'](BGColors[0][0][1], BGColors[1][0][1], N)
+    BGColor_B_Mov = TransistionFuncs_Color['B'](BGColors[0][0][2], BGColors[1][0][2], N)
+    BGColor_Mov = np.dstack((BGColor_R_Mov, BGColor_G_Mov, BGColor_B_Mov))[0]
     for n in range(N):
-        GeneratedImgs.append(np.ones(I1.shape, int)*BGColor_Mov[n])
-        NColorsAdded_Imgs.append(np.zeros((I1.shape[0], I1.shape[1]), int))
+        GeneratedImgs.append(np.ones(size, int)*BGColor_Mov[n])
+        NColorsAdded_Imgs.append(np.zeros((size[0], size[1]), int))
 
     # Apply Transistion for Mappings
     print("Calculating Transistion Images...")
@@ -149,9 +151,9 @@ def ApplyTransistionToMapping_Fast(LocationMap, ColorMap, BGColors, TransistionF
 
     X_Mov = TransistionFuncs_Location['X'](LocationMap[:, 0, 0], LocationMap[:, 1, 0], N)
     Y_Mov = TransistionFuncs_Location['Y'](LocationMap[:, 0, 1], LocationMap[:, 1, 1], N)
-    C_R_Mov = TransistionFunc_Color(ColorMap_R[:, 0], ColorMap_R[:, 1], N)
-    C_G_Mov = TransistionFunc_Color(ColorMap_G[:, 0], ColorMap_G[:, 1], N)
-    C_B_Mov = TransistionFunc_Color(ColorMap_B[:, 0], ColorMap_B[:, 1], N)
+    C_R_Mov = TransistionFuncs_Color['R'](ColorMap_R[:, 0], ColorMap_R[:, 1], N)
+    C_G_Mov = TransistionFuncs_Color['G'](ColorMap_G[:, 0], ColorMap_G[:, 1], N)
+    C_B_Mov = TransistionFuncs_Color['B'](ColorMap_B[:, 0], ColorMap_B[:, 1], N)
     C_Mov = np.dstack((C_R_Mov, C_G_Mov, C_B_Mov))
     
     Colors = C_Mov

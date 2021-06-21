@@ -176,7 +176,8 @@ def ImageSimplify_RangeReplace(I, valRange=[[0, 0, 0], [50, 50, 50]], replaceVal
 
     I_replaceMask = np.ones(I.shape[:2], dtype=bool)
     for c in range(I.shape[-1]):
-        I_replaceMask = I_replaceMask & (I[:, :, c] >= valRange[0][c]) & (I[:, :, c] <= valRange[1][c])
+        minVal, maxVal = min(valRange[0][c], valRange[1][c]), max(valRange[0][c], valRange[1][c])
+        I_replaceMask = I_replaceMask & (I[:, :, c] >= minVal) & (I[:, :, c] <= maxVal)
 
     I_simplified = np.copy(I)
     I_simplified[I_replaceMask] = replaceVal

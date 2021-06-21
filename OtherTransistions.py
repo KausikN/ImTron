@@ -113,73 +113,73 @@ def I_Transistion_SinglePixelExplode_Fast(I, StartLocation, TransistionFuncs, N=
     return GeneratedImgs, np.array(StartImg, dtype=np.uint8)
 
 # Driver Code
-# Params
-mainPath = 'TestImgs/'
-imgName = 'Test2.jpg'
+# # Params
+# mainPath = 'TestImgs/'
+# imgName = 'Test2.jpg'
 
-imgSize = (300, 300, 3)
+# imgSize = (300, 300, 3)
 
-StartLocation = (0.1, 0.1)
-relativeStart = True
+# StartLocation = (0.1, 0.1)
+# relativeStart = True
 
-BGColorRange = [[0, 0, 0], [100, 100, 100]]
-BGColor = [0, 0, 0]
+# BGColorRange = [[0, 0, 0], [100, 100, 100]]
+# BGColor = [0, 0, 0]
 
-TransistionFuncs = {
-    'X': functools.partial(TransistionLibrary.LinearTransistion_Fast),
-    'Y': functools.partial(TransistionLibrary.LinearTransistion_Fast)
-}
+# TransistionFuncs = {
+#     'X': functools.partial(TransistionLibrary.LinearTransistion_Fast),
+#     'Y': functools.partial(TransistionLibrary.LinearTransistion_Fast)
+# }
 
-divergent = True # If divergent, then GIF starts at one pixel and explodes to image -- else Image converges to one pixel
+# divergent = True # If divergent, then GIF starts at one pixel and explodes to image -- else Image converges to one pixel
 
-N = 50
-ImagePaddingCount = 10
+# N = 50
+# ImagePaddingCount = 10
 
-displayDelay = 0.0001
+# displayDelay = 0.0001
 
-plotData = True
-saveData = True
+# plotData = True
+# saveData = True
 
-# Read the Image and Resize
-I = cv2.imread(mainPath + imgName)
-I, imgSize = Utils.ResizeImage(I, imgSize)
-print(imgSize)
+# # Read the Image and Resize
+# I = cv2.imread(mainPath + imgName)
+# I, imgSize = Utils.ResizeImage(I, imgSize)
+# print(imgSize)
 
-# Simplify BGColors
-I = ImageSimplify.ImageSimplify_RangeReplace(I, valRange=BGColorRange, replaceVal=BGColor)
+# # Simplify BGColors
+# I = ImageSimplify.ImageSimplify_RangeReplace(I, valRange=BGColorRange, replaceVal=BGColor)
 
-# Determine Start Location
-if relativeStart:
-    StartLocation = [int(imgSize[0] * StartLocation[0]), int(imgSize[1] * StartLocation[1])]
+# # Determine Start Location
+# if relativeStart:
+#     StartLocation = [int(imgSize[0] * StartLocation[0]), int(imgSize[1] * StartLocation[1])]
 
-# Show Image
-if plotData:
-    plt.imshow(I)
-    plt.show()
+# # Show Image
+# if plotData:
+#     plt.imshow(I)
+#     plt.show()
 
-# Generate the images
-GeneratedImgs, StartImg = I_Transistion_SinglePixelExplode_Fast(I, StartLocation, TransistionFuncs, N, BGColor)
-# Add Original Image Padding and check for divergence and invert order if necessary
-for i in range(ImagePaddingCount):
-    GeneratedImgs.insert(0, StartImg)
-    GeneratedImgs.append(I)
-if not divergent:
-    GeneratedImgs = GeneratedImgs[::-1]
+# # Generate the images
+# GeneratedImgs, StartImg = I_Transistion_SinglePixelExplode_Fast(I, StartLocation, TransistionFuncs, N, BGColor)
+# # Add Original Image Padding and check for divergence and invert order if necessary
+# for i in range(ImagePaddingCount):
+#     GeneratedImgs.insert(0, StartImg)
+#     GeneratedImgs.append(I)
+# if not divergent:
+#     GeneratedImgs = GeneratedImgs[::-1]
 
-# Save
-if saveData:
-    saveMainPath = 'Images/'
+# # Save
+# if saveData:
+#     saveMainPath = 'Images/'
 
-    # pickle.dump(GeneratedImgs, open(saveMainPath + 'GeneratedImgs.p', 'wb'))
-    cv2.imwrite(saveMainPath + "SinglePixelExplode_I.png", cv2.cvtColor(I, cv2.COLOR_BGR2RGB))
+#     # pickle.dump(GeneratedImgs, open(saveMainPath + 'GeneratedImgs.p', 'wb'))
+#     cv2.imwrite(saveMainPath + "SinglePixelExplode_I.png", cv2.cvtColor(I, cv2.COLOR_BGR2RGB))
 
-    saveFileName = 'SinglePixelExplode.gif'
-    mode = 'gif'
-    frameSize = (imgSize[0], imgSize[1])
-    fps = 120
-    Utils.SaveImageSequence(GeneratedImgs, saveMainPath + saveFileName, mode=mode, frameSize=None, fps=fps)
+#     saveFileName = 'SinglePixelExplode.gif'
+#     mode = 'gif'
+#     frameSize = (imgSize[0], imgSize[1])
+#     fps = 120
+#     Utils.SaveImageSequence(GeneratedImgs, saveMainPath + saveFileName, mode=mode, frameSize=None, fps=fps)
     
 
-# Display
-# if plotData:
-Utils.DisplayImageSequence(GeneratedImgs, displayDelay)
+# # Display
+# # if plotData:
+# Utils.DisplayImageSequence(GeneratedImgs, displayDelay)
