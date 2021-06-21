@@ -439,15 +439,18 @@ def UI_LoadGenerateImages_SinglePixel():
         USERINPUT_BGColor = Hex_to_RGB(st.color_picker("Select Background Color", value="#000000"))
         ColorCount_Range = (int((N_Pixels/USERINPUT_NColors)*USERINPUT_FillPercents[0]), int((N_Pixels/USERINPUT_NColors)*USERINPUT_FillPercents[1]))
 
-        # Regen and Reshuffle Buttons
+        # Regen Button
         USERINPUT_Regenerate = st.button("Regenerate")
-        
+
         USERINPUT_Image_1 = None
         if USERINPUT_Regenerate:
             USERINPUT_Image_1 = GenerateRandomImage(ImageSize, USERINPUT_BGColor, USERINPUT_NColors, ColorCount_Range)
             cv2.imwrite(DEFAULT_SAVEPATH1, USERINPUT_Image_1)
         else:
             USERINPUT_Image_1 = cv2.imread(DEFAULT_SAVEPATH1)
+        
+        col1, col2 = st.beta_columns(2)
+        col1.image(USERINPUT_Image_1, caption="Generated Source Image", use_column_width=True)
 
     USERINPUT_StartPos = UI_SelectStartPosition(USERINPUT_Image_1.shape[:2])
 
