@@ -191,19 +191,20 @@ def UI_DisplayImageSequence(GeneratedImgs):
             outputDisplay.image(GeneratedImgs[i], caption='Generated Transistion', use_column_width=use_column_width)
 
 def UI_DisplayImageSequence_AsGIF(GeneratedImgs):
+    GeneratedImgs_Display = []
     # Resize
-    use_column_width = True
     if DISPLAY_IMAGESIZE is not None:
-        use_column_width = False
         displaySizeMax = max(GeneratedImgs[0].shape[0], GeneratedImgs[0].shape[1])
         displaySize = [int((DISPLAY_IMAGESIZE[1]/displaySizeMax)*GeneratedImgs[0].shape[1]), int((DISPLAY_IMAGESIZE[0]/displaySizeMax)*GeneratedImgs[0].shape[0])]
         print("Resizing Sequence for displaying...")
-        for i in tqdm(range(len(GeneratedImgs))):
-            GeneratedImgs[i] = cv2.resize(GeneratedImgs[i], tuple(displaySize), interpolation=DISPLAY_INTERPOLATION)
-    # Save
+        for I in tqdm(GeneratedImgs):
+            GeneratedImgs_Display.append(cv2.resize(np.array(I), tuple(displaySize), interpolation=DISPLAY_INTERPOLATION))
+    # Save and Display - Clear GIF
+    Utils.SaveImageSequence(GeneratedImgs_Display, DEFAULT_SAVEPATH_GIF, mode='gif', frameSize=None, fps=25)
+    st.image(DEFAULT_SAVEPATH_GIF, "Generated Transistion - Clear Display", use_column_width=False)
+    # Save and Display - Output GIF
     Utils.SaveImageSequence(GeneratedImgs, DEFAULT_SAVEPATH_GIF, mode='gif', frameSize=None, fps=25)
-    # Display
-    st.image(DEFAULT_SAVEPATH_GIF, "Generated Transistion", use_column_width=use_column_width)
+    st.image(DEFAULT_SAVEPATH_GIF, "Generated Transistion - Actual Size", use_column_width=False)
 
 def UI_LoadImageFiles():
     USERINPUT_SwapImages = st.checkbox("Swap Images")
