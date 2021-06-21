@@ -52,13 +52,14 @@ def DisplayImageSequence(ImgSeq, delay=1):
 def SaveImageSequence(ImgSeq, path, mode='gif', frameSize=None, fps=25):
     # modes
     # gif
-    if mode in ['gif', 'GIF', 'G', 'g']:
+    if mode.lower() in ['gif', 'g']:
         imageio.mimsave(path, ImgSeq)
     # Video
-    elif mode in ['V', 'v', 'Video', 'video', 'VIDEO', 'VID', 'vid']:
+    elif mode.lower() in ['v', 'video', 'vid']:
         if frameSize == None:
             frameSize = (ImgSeq[0].shape[0], ImgSeq[0].shape[1])
-        vid = cv2.VideoWriter(path, cv2.VideoWriter_fourcc(*'DIVX'), fps, frameSize)
+        fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+        vid = cv2.VideoWriter(path, fourcc, fps, frameSize)
         for i in range(len(ImgSeq)):
             vid.write(ImgSeq[i])
         vid.release()

@@ -21,6 +21,7 @@ from Utils import TransistionLibrary
 from Utils import ResizeLibrary
 from Utils import ImageSimplify
 from Utils import ImageGenerator
+from Utils import Utils
 
 # Main Vars
 config = json.load(open('./StreamLitGUI/UIConfig.json', 'r'))
@@ -58,6 +59,7 @@ DEFAULT_PATH_EXAMPLEIMAGE2 = 'TestImgs/LS_2.jpg'
 
 DEFAULT_SAVEPATH1 = 'TestImgs/RandomImage1.png'
 DEFAULT_SAVEPATH2 = 'TestImgs/RandomImage2.png'
+DEFAULT_SAVEPATH_GIF = 'TestImgs/OutputGIF.gif'
 
 TRANSISTIONFUNCS = {
     "Linear": TransistionLibrary.LinearTransistion_Fast
@@ -187,6 +189,12 @@ def UI_DisplayImageSequence(GeneratedImgs):
         for i in range(len(GeneratedImgs)):
             plt.pause(DISPLAY_DELAY)
             outputDisplay.image(GeneratedImgs[i], caption='Generated Transistion', use_column_width=use_column_width)
+
+def UI_DisplayImageSequence_AsGIF(GeneratedImgs):
+    # Save
+    Utils.SaveImageSequence(GeneratedImgs, DEFAULT_SAVEPATH_GIF, mode='gif', frameSize=None, fps=25)
+    # Display
+    st.image(DEFAULT_SAVEPATH_GIF, "Generated Transistion", use_column_width=True)
 
 def UI_LoadImageFiles():
     USERINPUT_SwapImages = st.checkbox("Swap Images")
@@ -523,7 +531,7 @@ def color_based_transistion():
             GeneratedImgs = GeneratedImgs + GeneratedImgs[::-1]
 
         # Display Outputs
-        UI_DisplayImageSequence(GeneratedImgs)
+        UI_DisplayImageSequence_AsGIF(GeneratedImgs)
 
 def location_based_transistion():
     # Title
@@ -546,7 +554,7 @@ def location_based_transistion():
             GeneratedImgs = GeneratedImgs[::-1]
 
         # Display Outputs
-        UI_DisplayImageSequence(GeneratedImgs)
+        UI_DisplayImageSequence_AsGIF(GeneratedImgs)
 
 def image_to_image_transistion():
     # Title
@@ -573,7 +581,7 @@ def image_to_image_transistion():
             GeneratedImgs = GeneratedImgs[::-1]
 
         # Display Outputs
-        UI_DisplayImageSequence(GeneratedImgs)
+        UI_DisplayImageSequence_AsGIF(GeneratedImgs)
 
 def single_pixel_transistion():
     # Title
@@ -595,7 +603,7 @@ def single_pixel_transistion():
             GeneratedImgs = GeneratedImgs[::-1]
 
         # Display Outputs
-        UI_DisplayImageSequence(GeneratedImgs)
+        UI_DisplayImageSequence_AsGIF(GeneratedImgs)
     
 #############################################################################################################################
 # Driver Code
