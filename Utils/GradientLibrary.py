@@ -4,10 +4,8 @@ Library for Gradient Colour Generation and Viewing
 
 # Imports
 import cv2
-from colour import Color
 import numpy as np
 from numpy import random as rnd
-from mpl_toolkits.mplot3d import Axes3D
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 
