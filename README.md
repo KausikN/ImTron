@@ -4,14 +4,9 @@
  Hosted at [https://infinityjoker-images.herokuapp.com/](https://infinityjoker-images.herokuapp.com/)
 
 # GUI
- - Install streamlit using
-   ```
-   pip install streamlit
-   ```
- - Launch Streamlit GUI in the repo folder by
-   ```
-   streamlit run app.py
-   ```
+
+ - GUI Hosted using streamlit
+ - Run [StartUI.sh](StartUI.sh) to view the app on your browser!
  
 # Combined Transistions
    - Generates transistion images based on combination of all factors
