@@ -1,0 +1,11 @@
+{
+    "repo_name": "ImTron",
+    "requirements": [
+        "streamlit",
+        "numpy",
+        "matplotlib",
+        "opencv-python-headless",
+        "tqdm",
+        "imageio"
+    ]
+}

@@ -1,13 +1,21 @@
 # ImTron
  ImTron is a tool to generate Transistion Images connecting 2 or more Images and generating GIFs or Videos from few images
  
- Hosted at [https://infinityjoker-images.herokuapp.com/](https://infinityjoker-images.herokuapp.com/)
-
 # GUI
+[![https://infinityjoker-apps.herokuapp.com/](https://pyheroku-badge.herokuapp.com/?app=infinityjoker-apps&style=plastic)](https://infinityjoker-apps.herokuapp.com/)
 
- - GUI Hosted using streamlit
- - Run [StartUI.sh](StartUI.sh) to view the app on your browser!
- 
+ - GUI built using streamlit
+ - To use app locally,
+    - Clone the repo and run [StartUI.sh](StartUI.sh) to view the app on your browser!
+ - App is also hosted remotely on heroku using my common host app,
+    - [https://infinityjoker-apps.herokuapp.com/](https://infinityjoker-apps.herokuapp.com/)
+
+    - In the Common Host App, simply choose a project to load and click load and deploy.
+
+    - Then go ahead and use the app! :)
+
+    - If you want to change to another app, simply click on View Other Projects in top left and choose any other project and load and deploy.
+
 # Combined Transistions
    - Generates transistion images based on combination of all factors
    - Can be exported as GIF or Video

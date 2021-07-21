@@ -1,0 +1,330 @@
+{
+    "name": "ImTron",
+    "repoLink": "https://github.com/KausikN/ImTron",
+    "localPath": "E:/Github Codes and Projects/Projects/ImTron",
+    "modules": {
+        "app.py": {
+            "name": "app",
+            "type": "local",
+            "link": "https://github.com/KausikN/ImTron/blob/master/app.py",
+            "parentDir": "E:/Github Codes and Projects/Projects/ImTron",
+            "subDir": "",
+            "dependencies": [
+                "cv2.py",
+                "functools.py",
+                "numpy.py",
+                "streamlit.py",
+                "matplotlib.pyplot.py",
+                "json.py",
+                "tqdm.py",
+                "Img2ImgTransistion_ColorBased.py",
+                "Img2ImgTransistion_LocationBased.py",
+                "Img2ImgTransistion_LocationColorBased.py",
+                "OtherTransistions.py",
+                "Utils/MappingLibrary.py",
+                "Utils/TransistionLibrary.py",
+                "Utils/ResizeLibrary.py",
+                "Utils/ImageSimplify.py",
+                "Utils/ImageGenerator.py",
+                "Utils/Utils.py"
+            ]
+        },
+        "Img2ImgTransistion_ColorBased.py": {
+            "name": "Img2ImgTransistion_ColorBased",
+            "type": "local",
+            "link": "https://github.com/KausikN/ImTron/blob/master/Img2ImgTransistion_ColorBased.py",
+            "parentDir": "E:/Github Codes and Projects/Projects/ImTron",
+            "subDir": "",
+            "dependencies": [
+                "cv2.py",
+                "functools.py",
+                "numpy.py",
+                "matplotlib.pyplot.py",
+                "matplotlib/animation.py",
+                "tqdm.py",
+                "Utils/Utils.py",
+                "Utils/ResizeLibrary.py",
+                "Utils/TransistionLibrary.py",
+                "Utils/ImageGenerator.py"
+            ]
+        },
+        "Img2ImgTransistion_LocationBased.py": {
+            "name": "Img2ImgTransistion_LocationBased",
+            "type": "local",
+            "link": "https://github.com/KausikN/ImTron/blob/master/Img2ImgTransistion_LocationBased.py",
+            "parentDir": "E:/Github Codes and Projects/Projects/ImTron",
+            "subDir": "",
+            "dependencies": [
+                "cv2.py",
+                "functools.py",
+                "numpy.py",
+                "matplotlib.pyplot.py",
+                "tqdm.py",
+                "Utils/Utils.py",
+                "Utils/ImageSimplify.py",
+                "Utils/ResizeLibrary.py",
+                "Utils/MappingLibrary.py",
+                "Utils/TransistionLibrary.py",
+                "Utils/ImageGenerator.py"
+            ]
+        },
+        "Img2ImgTransistion_LocationColorBased.py": {
+            "name": "Img2ImgTransistion_LocationColorBased",
+            "type": "local",
+            "link": "https://github.com/KausikN/ImTron/blob/master/Img2ImgTransistion_LocationColorBased.py",
+            "parentDir": "E:/Github Codes and Projects/Projects/ImTron",
+            "subDir": "",
+            "dependencies": [
+                "cv2.py",
+                "pickle.py",
+                "functools.py",
+                "numpy.py",
+                "matplotlib.pyplot.py",
+                "tqdm.py",
+                "Utils/Utils.py",
+                "Utils/ImageSimplify.py",
+                "Utils/ResizeLibrary.py",
+                "Utils/MappingLibrary.py",
+                "Utils/TransistionLibrary.py",
+                "Utils/ImageGenerator.py"
+            ]
+        },
+        "OtherTransistions.py": {
+            "name": "OtherTransistions",
+            "type": "local",
+            "link": "https://github.com/KausikN/ImTron/blob/master/OtherTransistions.py",
+            "parentDir": "E:/Github Codes and Projects/Projects/ImTron",
+            "subDir": "",
+            "dependencies": [
+                "cv2.py",
+                "pickle.py",
+                "functools.py",
+                "numpy.py",
+                "matplotlib.pyplot.py",
+                "tqdm.py",
+                "Utils/Utils.py",
+                "Utils/ImageSimplify.py",
+                "Utils/ResizeLibrary.py",
+                "Utils/MappingLibrary.py",
+                "Utils/TransistionLibrary.py",
+                "Utils/ImageGenerator.py"
+            ]
+        },
+        "Utils/BGR2RGB.py": {
+            "name": "BGR2RGB",
+            "type": "local",
+            "link": "https://github.com/KausikN/ImTron/blob/master/Utils/BGR2RGB.py",
+            "parentDir": "E:/Github Codes and Projects/Projects/ImTron",
+            "subDir": "Utils",
+            "dependencies": [
+                "cv2.py"
+            ]
+        },
+        "Utils/GradientLibrary.py": {
+            "name": "GradientLibrary",
+            "type": "local",
+            "link": "https://github.com/KausikN/ImTron/blob/master/Utils/GradientLibrary.py",
+            "parentDir": "E:/Github Codes and Projects/Projects/ImTron",
+            "subDir": "Utils",
+            "dependencies": [
+                "cv2.py",
+                "numpy.py",
+                "numpy.py",
+                "matplotlib.py",
+                "matplotlib.pyplot.py",
+                "tqdm.py"
+            ]
+        },
+        "Utils/ImageGenerator.py": {
+            "name": "ImageGenerator",
+            "type": "local",
+            "link": "https://github.com/KausikN/ImTron/blob/master/Utils/ImageGenerator.py",
+            "parentDir": "E:/Github Codes and Projects/Projects/ImTron",
+            "subDir": "Utils",
+            "dependencies": [
+                "cv2.py",
+                "random.py",
+                "numpy.py",
+                "matplotlib.pyplot.py",
+                "Utils/Utils.py"
+            ]
+        },
+        "Utils/ImageSimplify.py": {
+            "name": "ImageSimplify",
+            "type": "local",
+            "link": "https://github.com/KausikN/ImTron/blob/master/Utils/ImageSimplify.py",
+            "parentDir": "E:/Github Codes and Projects/Projects/ImTron",
+            "subDir": "Utils",
+            "dependencies": [
+                "numpy.py",
+                "matplotlib.pyplot.py",
+                "cv2.py",
+                "tqdm.py",
+                "os.py"
+            ]
+        },
+        "Utils/MappingLibrary.py": {
+            "name": "MappingLibrary",
+            "type": "local",
+            "link": "https://github.com/KausikN/ImTron/blob/master/Utils/MappingLibrary.py",
+            "parentDir": "E:/Github Codes and Projects/Projects/ImTron",
+            "subDir": "Utils",
+            "dependencies": [
+                "random.py",
+                "itertools.py",
+                "numpy.py",
+                "tqdm.py"
+            ]
+        },
+        "Utils/ResizeLibrary.py": {
+            "name": "ResizeLibrary",
+            "type": "local",
+            "link": "https://github.com/KausikN/ImTron/blob/master/Utils/ResizeLibrary.py",
+            "parentDir": "E:/Github Codes and Projects/Projects/ImTron",
+            "subDir": "Utils",
+            "dependencies": [
+                "cv2.py",
+                "numpy.py"
+            ]
+        },
+        "Utils/TransistionLibrary.py": {
+            "name": "TransistionLibrary",
+            "type": "local",
+            "link": "https://github.com/KausikN/ImTron/blob/master/Utils/TransistionLibrary.py",
+            "parentDir": "E:/Github Codes and Projects/Projects/ImTron",
+            "subDir": "Utils",
+            "dependencies": [
+                "numpy.py"
+            ]
+        },
+        "Utils/Utils.py": {
+            "name": "Utils",
+            "type": "local",
+            "link": "https://github.com/KausikN/ImTron/blob/master/Utils/Utils.py",
+            "parentDir": "E:/Github Codes and Projects/Projects/ImTron",
+            "subDir": "Utils",
+            "dependencies": [
+                "cv2.py",
+                "random.py",
+                "imageio.py",
+                "itertools.py",
+                "numpy.py",
+                "matplotlib.pyplot.py",
+                "matplotlib/animation.py",
+                "tqdm.py"
+            ]
+        },
+        "imageio.py": {
+            "name": "imageio",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/ImTron",
+            "subDir": "",
+            "dependencies": []
+        },
+        "matplotlib/animation.py": {
+            "name": "animation",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/ImTron",
+            "subDir": "matplotlib",
+            "dependencies": []
+        },
+        "matplotlib.py": {
+            "name": "matplotlib",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/ImTron",
+            "subDir": "",
+            "dependencies": []
+        },
+        "matplotlib.pyplot.py": {
+            "name": "matplotlib.pyplot",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/ImTron",
+            "subDir": "",
+            "dependencies": []
+        },
+        "os.py": {
+            "name": "os",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/ImTron",
+            "subDir": "",
+            "dependencies": []
+        },
+        "functools.py": {
+            "name": "functools",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/ImTron",
+            "subDir": "",
+            "dependencies": []
+        },
+        "cv2.py": {
+            "name": "cv2",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/ImTron",
+            "subDir": "",
+            "dependencies": []
+        },
+        "itertools.py": {
+            "name": "itertools",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/ImTron",
+            "subDir": "",
+            "dependencies": []
+        },
+        "streamlit.py": {
+            "name": "streamlit",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/ImTron",
+            "subDir": "",
+            "dependencies": []
+        },
+        "random.py": {
+            "name": "random",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/ImTron",
+            "subDir": "",
+            "dependencies": []
+        },
+        "tqdm.py": {
+            "name": "tqdm",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/ImTron",
+            "subDir": "",
+            "dependencies": []
+        },
+        "json.py": {
+            "name": "json",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/ImTron",
+            "subDir": "",
+            "dependencies": []
+        },
+        "numpy.py": {
+            "name": "numpy",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/ImTron",
+            "subDir": "",
+            "dependencies": []
+        },
+        "pickle.py": {
+            "name": "pickle",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/ImTron",
+            "subDir": "",
+            "dependencies": []
+        }
+    }
+}
