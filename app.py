@@ -208,7 +208,7 @@ def UI_DisplayImageSequence_AsGIF(GeneratedImgs):
 
 def UI_LoadImageFiles():
     USERINPUT_SwapImages = st.checkbox("Swap Images")
-    col1, col2 = st.beta_columns(2)
+    col1, col2 = st.columns(2)
 
     USERINPUT_ImageData_1 = col1.file_uploader("Upload Start Image", ['png', 'jpg', 'jpeg', 'bmp'])
     if USERINPUT_ImageData_1 is not None:
@@ -259,7 +259,7 @@ def UI_LoadGenerateImages_Location():
         # Resize and Simplify
         CustomSize = UI_CustomResize()
         USERINPUT_Image_1 = cv2.resize(USERINPUT_Image_1, tuple(CustomSize))
-        col1, col2 = st.beta_columns(2)
+        col1, col2 = st.columns(2)
         USERINPUT_BGColorStart = Hex_to_RGB(col1.color_picker("Select Background Color Start", value="#000000", key="Start" + str(col1)))
         USERINPUT_BGColorEnd = Hex_to_RGB(col2.color_picker("Select Background Color End", value="#303030", key="End" + str(col2)))
         col1.image(USERINPUT_Image_1, caption="Resized Source Image", use_column_width=True)
@@ -268,7 +268,7 @@ def UI_LoadGenerateImages_Location():
         USERINPUT_BGColor = USERINPUT_BGColorStart
 
         # Regen and Reshuffle Buttons
-        col1, col2 = st.beta_columns(2)
+        col1, col2 = st.columns(2)
         USERINPUT_Reshuffle = col2.button("Reshuffle")
 
     # Random Image
@@ -286,7 +286,7 @@ def UI_LoadGenerateImages_Location():
         ColorCount_Range = (int((N_Pixels/USERINPUT_NColors)*USERINPUT_FillPercents[0]), int((N_Pixels/USERINPUT_NColors)*USERINPUT_FillPercents[1]))
 
         # Regen and Reshuffle Buttons
-        col1, col2 = st.beta_columns(2)
+        col1, col2 = st.columns(2)
         USERINPUT_Regenerate = col1.button("Regenerate")
         USERINPUT_Reshuffle = col2.button("Reshuffle")
         
@@ -305,7 +305,7 @@ def UI_LoadGenerateImages_Location():
 
     if USERINPUT_SwapImages:
         USERINPUT_Image_1, USERINPUT_Image_2 = USERINPUT_Image_2, USERINPUT_Image_1
-    col1, col2 = st.beta_columns(2)
+    col1, col2 = st.columns(2)
     col1.image(USERINPUT_Image_1, caption="Start Image", use_column_width=True)
     col2.image(USERINPUT_Image_2, caption="End Image", use_column_width=True)
 
@@ -328,7 +328,7 @@ def UI_LoadGenerateImages_LocationColor():
     USERINPUT_Image_2 = None
     # Upload
     if USERINPUT_GenerateMethod == GENERATE_METHODS[0]:
-        col1, col2 = st.beta_columns(2)
+        col1, col2 = st.columns(2)
         USERINPUT_ImageData_1 = col1.file_uploader("Upload Start Image", ['png', 'jpg', 'jpeg', 'bmp'])
         if USERINPUT_ImageData_1 is not None:
             USERINPUT_ImageData_1 = USERINPUT_ImageData_1.read()
@@ -347,7 +347,7 @@ def UI_LoadGenerateImages_LocationColor():
         # Resize
         USERINPUT_Image_1, USERINPUT_Image_2 = UI_Resizer(USERINPUT_Image_1, USERINPUT_Image_2)
         # BGColor Simplify
-        col1, col2 = st.beta_columns(2)
+        col1, col2 = st.columns(2)
         USERINPUT_BGColor_1, USERINPUT_Image_1 = UI_BGColorSelect(USERINPUT_Image_1, col=col1)
         USERINPUT_BGColor_2, USERINPUT_Image_2 = UI_BGColorSelect(USERINPUT_Image_2, col=col2)
         USERINPUT_BGColor = [USERINPUT_BGColor_1, USERINPUT_BGColor_2]
@@ -361,7 +361,7 @@ def UI_LoadGenerateImages_LocationColor():
         minColorCount = min(10, N_Pixels)
 
         # Get Generation Parameters 1
-        col1, col2 = st.beta_columns(2)
+        col1, col2 = st.columns(2)
         USERINPUT_NColors_1 = col1.slider("N Random Colors", 1, int(N_Pixels/minColorCount), 1)
         USERINPUT_FillPercents_1 = col1.slider("Image Fill Ratio", 0.0, 1.0, (0.0, 1.0), 0.1)
         USERINPUT_BGColor_1 = Hex_to_RGB(col1.color_picker("Select Background Color", value="#000000"))
@@ -388,7 +388,7 @@ def UI_LoadGenerateImages_LocationColor():
     if USERINPUT_SwapImages:
         USERINPUT_Image_1, USERINPUT_Image_2 = USERINPUT_Image_2, USERINPUT_Image_1
     
-    col1, col2 = st.beta_columns(2)
+    col1, col2 = st.columns(2)
     col1.image(USERINPUT_Image_1, caption="Start Image", use_column_width=True)
     col2.image(USERINPUT_Image_2, caption="End Image", use_column_width=True)
 
@@ -418,7 +418,7 @@ def UI_LoadGenerateImages_SinglePixel():
         # Resize and Simplify
         CustomSize = UI_CustomResize()
         USERINPUT_Image_1 = cv2.resize(USERINPUT_Image_1, tuple(CustomSize))
-        col1, col2 = st.beta_columns(2)
+        col1, col2 = st.columns(2)
         USERINPUT_BGColorStart = Hex_to_RGB(col1.color_picker("Select Background Color Start", value="#000000", key="Start" + str(col1)))
         USERINPUT_BGColorEnd = Hex_to_RGB(col2.color_picker("Select Background Color End", value="#303030", key="End" + str(col2)))
         col1.image(USERINPUT_Image_1, caption="Resized Source Image", use_column_width=True)
@@ -449,7 +449,7 @@ def UI_LoadGenerateImages_SinglePixel():
         else:
             USERINPUT_Image_1 = cv2.imread(DEFAULT_SAVEPATH1)
         
-        col1, col2 = st.beta_columns(2)
+        col1, col2 = st.columns(2)
         col1.image(USERINPUT_Image_1, caption="Generated Source Image", use_column_width=True)
 
     USERINPUT_StartPos = UI_SelectStartPosition(USERINPUT_Image_1.shape[:2])
@@ -472,14 +472,14 @@ def UI_ColorLocationMappingFuncSelect():
     if MappingFuncName == 'Distance Based':
         options={"C_L_Ratio": 0.5, "ColorSign": 1, "LocationSign": 1}
         options["C_L_Ratio"] = st.slider("Color to Location Ratio", 0.0, 1.0, 0.5, 0.1)
-        col1, col2 = st.beta_columns(2)
+        col1, col2 = st.columns(2)
         options["ColorSign"] = -1.0 if ((col1.select_slider("Color Optimizer", ["Minimize", "Maximize"], "Minimize")) == "Maximize") else 1.0
         options["LocationSign"] = -1.0 if ((col2.select_slider("Location Optimizer", ["Minimize", "Maximize"], "Minimize")) == "Maximize") else 1.0
         MappingFunc = functools.partial(MappingFunc, options=options)
     return MappingFunc
 
 def UI_SelectStartPosition(ImageSize):
-    col1, col2 = st.beta_columns(2)
+    col1, col2 = st.columns(2)
     USERINPUT_StartPosRelY = col2.slider("Horizontal", 0.0, 1.0, 0.5, 0.1, key="USERINPUT_StartPosRelX")
     USERINPUT_StartPosRelX = col2.slider("Vertical", 0.0, 1.0, 0.5, 0.1, key="USERINPUT_StartPosRelY")
     StartPosRel = [USERINPUT_StartPosRelX, USERINPUT_StartPosRelY]
@@ -490,7 +490,7 @@ def UI_SelectStartPosition(ImageSize):
     return StartPos
 
 def UI_CustomResize():
-    col1, col2 = st.beta_columns(2)
+    col1, col2 = st.columns(2)
     USERINPUT_ImageSizeX = col2.slider("Width Pixels", IMAGESIZE_MIN[0], IMAGESIZE_MAX[0], IMAGESIZE_DEFAULT[0], IMAGESIZE_MIN[0], key="USERINPUT_ImageSizeX")
     USERINPUT_ImageSizeY = col2.slider("Height Pixels", IMAGESIZE_MIN[1], IMAGESIZE_MAX[1], IMAGESIZE_DEFAULT[1], IMAGESIZE_MIN[1], key="USERINPUT_ImageSizeY")
     CustomSize = [int(USERINPUT_ImageSizeX), int(USERINPUT_ImageSizeY)]
@@ -509,7 +509,7 @@ def UI_Resizer(USERINPUT_Image_1, USERINPUT_Image_2):
         ResizeFunc = functools.partial(ResizeFunc, Size=tuple(CustomSize))
 
     USERINPUT_Image_1, USERINPUT_Image_2 = ResizeFunc(USERINPUT_Image_1, USERINPUT_Image_2)
-    col1, col2 = st.beta_columns(2)
+    col1, col2 = st.columns(2)
     col1.image(USERINPUT_Image_1, caption="Resized Start Image", use_column_width=True)
     col2.image(USERINPUT_Image_2, caption="Resized End Image", use_column_width=True)
 
@@ -552,7 +552,7 @@ def location_based_transistion():
 
     # Load Inputs
     USERINPUT_Image_1, USERINPUT_Image_2, BGColor = UI_LoadGenerateImages_Location()
-    col1, col2 = st.beta_columns(2)
+    col1, col2 = st.columns(2)
     TransistionFunc_Y = UI_TransistionFuncSelect('X Transistion Function', col1) # Flipped X and Y due to flipped coords in image indices
     TransistionFunc_X = UI_TransistionFuncSelect('Y Transistion Function', col2) # Flipped X and Y due to flipped coords in image indices
     MappingFunc = UI_LocationMappingFuncSelect()
@@ -575,10 +575,10 @@ def image_to_image_transistion():
 
     # Load Inputs
     USERINPUT_Image_1, USERINPUT_Image_2, BGColors = UI_LoadGenerateImages_LocationColor()
-    col1, col2 = st.beta_columns(2)
+    col1, col2 = st.columns(2)
     TransistionFunc_Y = UI_TransistionFuncSelect('X Transistion Function', col1) # Flipped X and Y due to flipped coords in image indices
     TransistionFunc_X = UI_TransistionFuncSelect('Y Transistion Function', col2) # Flipped X and Y due to flipped coords in image indices
-    col1, col2, col3 = st.beta_columns(3)
+    col1, col2, col3 = st.columns(3)
     TransistionFunc_R = UI_TransistionFuncSelect('Red Transistion Function', col1)
     TransistionFunc_G = UI_TransistionFuncSelect('Green Transistion Function', col2)
     TransistionFunc_B = UI_TransistionFuncSelect('Blue Transistion Function', col3)
@@ -602,7 +602,7 @@ def single_pixel_transistion():
 
     # Load Inputs
     USERINPUT_Image_1, USERINPUT_StartPos, BGColor = UI_LoadGenerateImages_SinglePixel()
-    col1, col2 = st.beta_columns(2)
+    col1, col2 = st.columns(2)
     TransistionFunc_Y = UI_TransistionFuncSelect('X Transistion Function', col1) # Flipped X and Y due to flipped coords in image indices
     TransistionFunc_X = UI_TransistionFuncSelect('Y Transistion Function', col2) # Flipped X and Y due to flipped coords in image indices
     
