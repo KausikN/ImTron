@@ -211,21 +211,21 @@ def UI_DisplayImageSequence_AsGIF(GeneratedImgs):
     st.image(DEFAULT_SAVEPATH_GIF, "Generated Transistion - Actual Size", use_column_width=False)
 
 def UI_DisplayImageSequence_AsVideo(GeneratedImgs):
-    GeneratedImgs_Display = []
-    # Resize
-    if DISPLAY_IMAGESIZE is not None:
-        displaySizeMax = max(GeneratedImgs[0].shape[0], GeneratedImgs[0].shape[1])
-        displaySize = [int((DISPLAY_IMAGESIZE[1]/displaySizeMax)*GeneratedImgs[0].shape[1]), int((DISPLAY_IMAGESIZE[0]/displaySizeMax)*GeneratedImgs[0].shape[0])]
-        print("Resizing Sequence for displaying...")
-        for I in tqdm(GeneratedImgs):
-            GeneratedImgs_Display.append(cv2.resize(np.array(I), tuple(displaySize), interpolation=DISPLAY_INTERPOLATION))
-    # Save and Display - Clear GIF
-    Utils.SaveImageSequence(GeneratedImgs_Display, DEFAULT_SAVEPATH_GIF, mode='gif', frameSize=None, fps=25)
-    st.image(DEFAULT_SAVEPATH_GIF, "Generated Transistion - Clear Display", use_column_width=False)
+    # GeneratedImgs_Display = []
+    # # Resize
+    # if DISPLAY_IMAGESIZE is not None:
+    #     displaySizeMax = max(GeneratedImgs[0].shape[0], GeneratedImgs[0].shape[1])
+    #     displaySize = [int((DISPLAY_IMAGESIZE[1]/displaySizeMax)*GeneratedImgs[0].shape[1]), int((DISPLAY_IMAGESIZE[0]/displaySizeMax)*GeneratedImgs[0].shape[0])]
+    #     print("Resizing Sequence for displaying...")
+    #     for I in tqdm(GeneratedImgs):
+    #         GeneratedImgs_Display.append(cv2.resize(np.array(I), tuple(displaySize), interpolation=DISPLAY_INTERPOLATION))
+    # # Save and Display - Clear GIF
+    # Utils.SaveImageSequence(GeneratedImgs_Display, DEFAULT_SAVEPATH_GIF, mode='gif', frameSize=None, fps=25)
+    # st.image(DEFAULT_SAVEPATH_GIF, "Generated Transistion - Clear Display", use_column_width=False)
     # Save and Display - Output Video
     st.markdown("## Generated Transistion Video")
-    fps = (len(GeneratedImgs_Display)/DEFAULT_VIDEO_DURATION)
-    Utils.SaveFrames2Video(GeneratedImgs_Display, DEFAULT_SAVEPATH_VIDEO, fps)
+    fps = (len(GeneratedImgs)/DEFAULT_VIDEO_DURATION)
+    Utils.SaveFrames2Video(GeneratedImgs, DEFAULT_SAVEPATH_VIDEO, fps, size=(GeneratedImgs[0].shape[0], GeneratedImgs[0].shape[1]))
     Utils.FixVideoFile(DEFAULT_SAVEPATH_VIDEO, DEFAULT_SAVEPATH_VIDEO_CONVERTED)
     st.video(DEFAULT_SAVEPATH_VIDEO_CONVERTED)
 
