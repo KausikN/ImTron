@@ -74,8 +74,6 @@ def GenerateShuffledImage(I):
     '''
     Generates a shuffled image
     '''
-    if I.ndim <= 2:
-        I = np.reshape(I, (I.shape[0], I.shape[1], 1))
     I_flat = np.reshape(I, (I.shape[0]*I.shape[1], I.shape[2]))
     I_shuffled_flat = np.copy(I_flat)
     np.random.shuffle(I_shuffled_flat)
