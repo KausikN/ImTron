@@ -1,5 +1,5 @@
 '''
-This Script allows generating a transistion from 1 image to another or a chain of images
+Utils Functions
 '''
 
 # Imports
@@ -10,35 +10,56 @@ import subprocess
 import numpy as np
 from PIL import Image
 import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation, PillowWriter
-
 from tqdm import tqdm
 
 # Main Functions
 def Grayscale2ColorFormat(I):
+    '''
+    Convert Grayscale Image to Color Format
+    '''
     if I.ndim == 2:
         I = np.reshape(I, (I.shape[0], I.shape[1], 1))
     return I
 
 def ResizeImage(I, Size):
-    if Size is not None:
-        I = cv2.cvtColor(cv2.resize(I, (Size[0], Size[1])), cv2.COLOR_BGR2RGB)
-    else:
-        I = cv2.cvtColor(I, cv2.COLOR_BGR2RGB)
+    '''
+    Resize Image to Size
+    '''
+    I = cv2.resize(I, (Size[0], Size[1]))
     return I, I.shape
 
-def ResizeImages(I1, I2, ResizeFunc=None, ResizeParams=None):
-    print("Before Resizing: I1:", I1.shape, "I2:", I2.shape)
+def ResizeImages(I1, I2, ResizeFunc=None, ResizeParams={}):
+    '''
+    Resize Images to Same Size
+    '''
     # Resize Match the 2 images - Final I1 and I2 must be of same size
-    if not ResizeFunc == None:
-        if ResizeParams == None:
-            I1, I2 = ResizeFunc(I1, I2)
-        else:
-            I1, I2 = ResizeFunc(I1, I2, ResizeParams)
+    print("Before Resizing: I1:", I1.shape, "I2:", I2.shape)
+    I1, I2 = ResizeFunc(I1, I2, **ResizeParams)
     print("After Resizing: I1:", I1.shape, "I2:", I2.shape)
     return I1, I2, I1.shape
 
+def ImageColourLocations(I, tqdm_disable=False):
+    '''
+    Get the locations of all colours in an image
+    '''
+    ColoursLocations = {}
+    # Init Colors
+    for i in range(I.shape[0]):
+        for j in range(I.shape[1]):
+            colourKey = ",".join(I[i, j, :].astype(str))
+            ColoursLocations[colourKey] = []    
+    # Get Locations
+    for i in tqdm(range(I.shape[0]), disable=tqdm_disable):
+        for j in range(I.shape[1]):
+            colourKey = ",".join(I[i, j, :].astype(str))
+            ColoursLocations[colourKey].append([i, j])
+            
+    return ColoursLocations
+
 def DisplayImageSequence(ImgSeq, delay=1):
+    '''
+    Display Image Sequence
+    '''
     imgIndex = 0
     N = len(ImgSeq)
     while(True):
@@ -52,6 +73,9 @@ def DisplayImageSequence(ImgSeq, delay=1):
 
 # OLD Function
 def SaveImageSequence(ImgSeq, path, mode='gif', frameSize=None, fps=25):
+    '''
+    Save Image Sequence - OLD
+    '''
     # modes
     # gif
     if mode.lower() in ['gif', 'g']:
@@ -72,6 +96,9 @@ def SaveImageSequence(ImgSeq, path, mode='gif', frameSize=None, fps=25):
 
 # NEW / Updated Function
 def SaveFrames2Video(frames, pathOut, fps=20.0, size=None):
+    '''
+    Save Frames to Video
+    '''
     if os.path.splitext(pathOut)[-1] == '.gif':
         frames_images = [Image.fromarray(frame) for frame in frames]
         extraFrames = []
@@ -86,6 +113,9 @@ def SaveFrames2Video(frames, pathOut, fps=20.0, size=None):
         out.release()
 
 def FixVideoFile(pathIn, pathOut):
+    '''
+    Fix Video File for displaying in streamlit
+    '''
     COMMAND_VIDEO_CONVERT = 'ffmpeg -i \"{path_in}\" -vcodec libx264 \"{path_out}\"'
     
     if os.path.exists(pathOut):
@@ -95,3 +125,5 @@ def FixVideoFile(pathIn, pathOut):
     print("Running Conversion Command:")
     print(convert_cmd + "\n")
     ConvertOutput = subprocess.getoutput(convert_cmd)
+
+# Driver Code

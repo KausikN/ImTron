@@ -11,10 +11,11 @@
             "name": "StreamlitGUI",
             "special": {
                 "choiceBased": {
-                    "Cached": 1
+                    "Cached": 0
                 },
                 "checkBased": {
-                    "StartUICheck": true
+                    "StartUICheck": true,
+                    "GenReqCheck": true
                 }
             }
         }
