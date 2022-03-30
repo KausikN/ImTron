@@ -1,12 +1,12 @@
 {
     "files_to_download": [
         "StreamLitGUI/",
+        "Utils/",
         "app.py",
         "Img2ImgTransistion_ColorBased.py",
         "Img2ImgTransistion_LocationBased.py",
         "Img2ImgTransistion_LocationColorBased.py",
         "OtherTransistions.py",
-        "Utils/",
         "TestImgs/LS_1.jpg",
         "TestImgs/LS_2.jpg"
     ]
