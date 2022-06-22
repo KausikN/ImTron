@@ -1,6 +1,6 @@
 imageio==2.9.0
 matplotlib==3.4.3
-numpy==1.21
+numpy==1.22.0
 opencv_python==4.5.4.58
 Pillow==9.0.1
 streamlit==1.7.0
